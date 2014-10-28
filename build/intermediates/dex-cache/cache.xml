@@ -2,28 +2,94 @@
 <pre-dex-items>
 
     <item
-        dex="/home/summers/Projects/SnapAndShare/app/build/intermediates/pre-dexed/debug/classes-88e83083fae479e634def570c047e5e233623548.jar"
-        jar="/home/summers/Projects/SnapAndShare/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.0/classes.jar"
+        dex="/home/summers/Projects/shoot-and-share/app/build/intermediates/pre-dexed/debug/classes-11dfcb4212f731c45db2663fdb18a4f1791bb628.jar"
+        jar="/home/summers/Projects/shoot-and-share/app/build/intermediates/exploded-aar/org.jboss.aerogear/aerogear-android-store/2.0.0-SNAPSHOT/classes.jar"
+        jumboMode="false"
+        revision="21.0.2"
+        sha1="94ded4f3e55690baf525d5401cb22e966aa05da8"/>
+    <item
+        dex="/home/summers/Projects/shoot-and-share/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.0-3b5c053ce6a8034da2705a915fa5882f76804700.jar"
+        jar="/home/summers/Projects/shoot-and-share/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.0/libs/internal_impl-21.0.0.jar"
+        jumboMode="false"
+        revision="21.0.2"
+        sha1="1609e6d42d0480b0f4188e2c29f75388fa12a8f0"/>
+    <item
+        dex="/home/summers/Projects/shoot-and-share/app/build/intermediates/pre-dexed/debug/classes-f6ff676125bd4e31e64a5bed8d03abd8080cf8ec.jar"
+        jar="/home/summers/Projects/shoot-and-share/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.0/classes.jar"
         jumboMode="false"
         revision="21.0.2"
         sha1="95fd37732ec852e99f07eeb516a3650172f1d136"/>
     <item
-        dex="/home/summers/Projects/SnapAndShare/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.0-61ba61e07f28a3a2b6c0a68ab4c3ccf4fc3d453a.jar"
+        dex="/home/summers/Projects/shoot-and-share/app/build/intermediates/pre-dexed/debug/classes-624e1e08464a12fcf9a029043d07c34604cd346e.jar"
+        jar="/home/summers/Projects/shoot-and-share/app/build/intermediates/exploded-aar/org.jboss.aerogear/aerogear-android-pipe/2.0.0-SNAPSHOT/classes.jar"
+        jumboMode="false"
+        revision="21.0.2"
+        sha1="cb2a7c23f1af914e778b9d355bbe224dd5ff0951"/>
+    <item
+        dex="/home/summers/Projects/shoot-and-share/app/build/intermediates/pre-dexed/debug/guava-13.0.1-939a2b2c693a4f0780e5b957107e139ead833903.jar"
+        jar="/home/summers/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/13.0.1/d6f22b1e60a2f1ef99e22c9f5fde270b2088365/guava-13.0.1.jar"
+        jumboMode="false"
+        revision="21.0.2"
+        sha1="0d6f22b1e60a2f1ef99e22c9f5fde270b2088365"/>
+    <item
+        dex="/home/summers/Projects/shoot-and-share/app/build/intermediates/pre-dexed/debug/sc-light-jdk15on-1.47.0.3-1df9094708d90c2c0accf89990153d96ba96b9ef.jar"
+        jar="/home/summers/.gradle/caches/modules-2/files-2.1/com.madgag/sc-light-jdk15on/1.47.0.3/ee5043d8e50e46b0daca4e798f52d7532c27b0c4/sc-light-jdk15on-1.47.0.3.jar"
+        jumboMode="false"
+        revision="21.0.2"
+        sha1="ee5043d8e50e46b0daca4e798f52d7532c27b0c4"/>
+    <item
+        dex="/home/summers/Projects/shoot-and-share/app/build/intermediates/pre-dexed/debug/scprov-jdk15on-1.47.0.3-886ea4ff485b463fc82b172cd3c569edbecd8f7e.jar"
+        jar="/home/summers/.gradle/caches/modules-2/files-2.1/com.madgag/scprov-jdk15on/1.47.0.3/a1ff8a74a7013c4ada7e4d20d335b302d147ddd1/scprov-jdk15on-1.47.0.3.jar"
+        jumboMode="false"
+        revision="21.0.2"
+        sha1="a1ff8a74a7013c4ada7e4d20d335b302d147ddd1"/>
+    <item
+        dex="/home/summers/Projects/shoot-and-share/app/build/intermediates/pre-dexed/debug/classes-93afb823631f1c37dbae715fc53af00578ca9ccf.jar"
+        jar="/home/summers/Projects/shoot-and-share/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.0.2"
+        sha1="686344a780033e4ba22b926cd225f8d4941247e6"/>
+    <item
+        dex="/home/summers/Projects/shoot-and-share/app/build/intermediates/pre-dexed/debug/classes-dd39972396789909b2c0ced4ed0b5ba2fe2215d7.jar"
+        jar="/home/summers/Projects/shoot-and-share/app/build/intermediates/exploded-aar/org.jboss.aerogear/aerogear-android-security/2.0.0-SNAPSHOT/classes.jar"
+        jumboMode="false"
+        revision="21.0.2"
+        sha1="3c88019bd4024b3ffe621931ceec44a81e97e6b2"/>
+    <item
+        dex="/home/summers/Projects/shoot-and-share/app/build/intermediates/pre-dexed/debug/classes-2d535586c9fa6b81ca9593df557d124482131aef.jar"
+        jar="/home/summers/Projects/shoot-and-share/app/build/intermediates/exploded-aar/org.jboss.aerogear/aerogear-android-core/2.0.0-SNAPSHOT/classes.jar"
+        jumboMode="false"
+        revision="21.0.2"
+        sha1="c28c561e36f981568ee09b482025df0df9479660"/>
+    <item
+        dex="/home/summers/Projects/shoot-and-share/app/build/intermediates/pre-dexed/debug/classes-0b401ce4e60b5bf1d3f0d39a4f1e334deac9c8e9.jar"
+        jar="/home/summers/Projects/shoot-and-share/app/build/intermediates/exploded-aar/org.jboss.aerogear/aerogear-android-authz/2.0.0-SNAPSHOT/classes.jar"
+        jumboMode="false"
+        revision="21.0.2"
+        sha1="860c0853d301d04e87ac4ec221d138efd58a1e78"/>
+    <item
+        dex="/home/summers/Projects/shoot-and-share/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.0-61ba61e07f28a3a2b6c0a68ab4c3ccf4fc3d453a.jar"
         jar="/home/summers/.m2/repository/com/android/support/support-annotations/21.0.0/support-annotations-21.0.0.jar"
         jumboMode="false"
         revision="21.0.2"
         sha1="1a578b9607b36266c63d43a4fa0ab5664dbe911e"/>
     <item
-        dex="/home/summers/Projects/SnapAndShare/app/build/intermediates/pre-dexed/debug/classes-a6a50cf5fce137ddf3897063c74ed2d1c8e2633e.jar"
-        jar="/home/summers/Projects/SnapAndShare/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.0/classes.jar"
+        dex="/home/summers/Projects/shoot-and-share/app/build/intermediates/pre-dexed/debug/gson-2.2.2-d49da1562166537dfc21cb73c021a2635f6cc172.jar"
+        jar="/home/summers/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.2.2/1f96456ca233dec780aa224bff076d8e8bca3908/gson-2.2.2.jar"
         jumboMode="false"
         revision="21.0.2"
-        sha1="686344a780033e4ba22b926cd225f8d4941247e6"/>
+        sha1="1f96456ca233dec780aa224bff076d8e8bca3908"/>
     <item
-        dex="/home/summers/Projects/SnapAndShare/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.0-3aec87a96cbbce01ca7cb0ca482c6fc09fdc022d.jar"
-        jar="/home/summers/Projects/SnapAndShare/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.0/libs/internal_impl-21.0.0.jar"
+        dex="/home/summers/Projects/shoot-and-share/app/build/intermediates/pre-dexed/debug/aerogear-crypto-0.1.5-android-c8f1100519b31f534b4ffc1470915c255f7141a4.jar"
+        jar="/home/summers/.gradle/caches/modules-2/files-2.1/org.jboss.aerogear/aerogear-crypto/0.1.5/300b50fc12a6213a2d20ee6849201477510935bc/aerogear-crypto-0.1.5-android.jar"
         jumboMode="false"
         revision="21.0.2"
-        sha1="1609e6d42d0480b0f4188e2c29f75388fa12a8f0"/>
+        sha1="300b50fc12a6213a2d20ee6849201477510935bc"/>
+    <item
+        dex="/home/summers/Projects/shoot-and-share/app/build/intermediates/pre-dexed/debug/annotations-4.1.1.4-8cab89bd86e522a6a207d1f3d99cb826489419e0.jar"
+        jar="/home/summers/.gradle/caches/modules-2/files-2.1/com.google.android/annotations/4.1.1.4/a1678ba907bf92691d879fef34e1a187038f9259/annotations-4.1.1.4.jar"
+        jumboMode="false"
+        revision="21.0.2"
+        sha1="a1678ba907bf92691d879fef34e1a187038f9259"/>
 
 </pre-dex-items>

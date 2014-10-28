@@ -1,0 +1,65 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity$PlaceholderFragment">
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/home_background" />
+
+    <ImageView
+        android:id="@+id/camera_button"
+        android:layout_alignLeft="@+id/connect_with"
+        android:layout_alignRight="@+id/connect_with"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/camera_icon"
+        />
+
+    <LinearLayout
+        android:id="@+id/connect_bar"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:layout_margin="16dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:layout_margin="12dp"
+            android:background="@color/blue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Google +"></Button>
+        <Button
+            android:background="@color/blue"
+            android:layout_margin="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Facebook"></Button>
+        <Button
+            android:background="@color/blue"
+            android:layout_margin="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="KeyCloak"></Button>
+        </LinearLayout>
+
+    <TextView
+        android:id="@+id/connect_with"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textColor="@android:color/white"
+        android:fontFamily="sans-serif-condensed"
+        android:textSize="22sp"
+        android:shadowRadius="1"
+        android:shadowColor="@color/light_blue"
+        android:layout_above="@+id/connect_bar"
+        android:text="Connect To : " />
+
+</RelativeLayout>

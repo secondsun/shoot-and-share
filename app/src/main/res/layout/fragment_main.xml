@@ -41,7 +41,8 @@
             android:layout_margin="12dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Facebook"></Button>
+            android:text="Facebook"
+            android:id="@+id/facebook_button"></Button>
         <Button
             android:background="@color/blue"
             android:layout_margin="12dp"

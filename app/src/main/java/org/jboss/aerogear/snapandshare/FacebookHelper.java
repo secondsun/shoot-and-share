@@ -6,40 +6,43 @@ import android.util.Pair;
 import android.widget.Toast;
 
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Sets;
 
 import org.jboss.aerogear.android.Callback;
 import org.jboss.aerogear.android.authorization.AuthzModule;
 import org.jboss.aerogear.android.impl.authz.AuthorizationManager;
 import org.jboss.aerogear.android.impl.authz.oauth2.OAuth2AuthorizationConfiguration;
+import org.jboss.aerogear.android.impl.authz.oauth2.OAuth2AuthzModule;
 
 import java.net.URL;
 import java.util.Arrays;
 
 /**
- * Created by summers on 10/27/14.
+ * Created by summers on 10/28/14.
  */
-public class GooglePlusHelper {
+public class FacebookHelper {
 
-    private static final String AUTHZ_URL = "https://accounts.google.com";
-    private static final String AUTHZ_ENDPOINT = "/o/oauth2/auth";
-    private static final String AUTHZ_TOKEN_ENDPOINT = "/o/oauth2/token";
-    private static final String AUTHZ_ACCOOUNT_ID = "google-token";
-    private static final String AUTHZ_CLIENT_ID = "37850448940-bqahddol8a694oadlqnj4n2el4kr5pqk.apps.googleusercontent.com";
-    private static final String AUTHZ_CLIENT_SECRET = "6F6pPjHQT29qwvqvxzNv_Ks7";
-    private static final String AUTHZ_REDIRECT_URL = "http://localhost";
+
+    private static final String AUTHZ_ENDPOINT = "www.facebook.com/dialog/oauth";
+    private static final String AUTHZ_TOKEN_ENDPOINT = "graph.facebook.com/oauth/access_token";
+    private static final String AUTHZ_ACCOOUNT_ID = "facebook-token";
+    private static final String AUTHZ_CLIENT_ID = "310605179126239";
+    private static final String AUTHZ_CLIENT_SECRET = "f6053a175cd0f3ce8de64c78ca974f82";
+    private static final String AUTHZ_REDIRECT_URL = "https://localhost/";
 
     public static void connect(final Activity activity) {
         try {
-            AuthzModule authzModule = AuthorizationManager.config("GoogleDriveAuthz", OAuth2AuthorizationConfiguration.class)
-                    .setBaseURL(new URL(AUTHZ_URL))
+            final OAuth2AuthzModule authzModule = (OAuth2AuthzModule) AuthorizationManager.config("FacebookOAuth", OAuth2AuthorizationConfiguration.class)
+                    .setBaseURL(new URL("https://"))
                     .setAuthzEndpoint(AUTHZ_ENDPOINT)
                     .setAccessTokenEndpoint(AUTHZ_TOKEN_ENDPOINT)
                     .setAccountId(AUTHZ_ACCOOUNT_ID)
                     .setClientId(AUTHZ_CLIENT_ID)
                     .setClientSecret(AUTHZ_CLIENT_SECRET)
                     .setRedirectURL(AUTHZ_REDIRECT_URL)
-                    .setScopes(Arrays.asList("https://www.googleapis.com/auth/drive"))
-                    .setAdditionalAuthorizationParams(ImmutableSet.of(Pair.create("access_type", "offline")))
+                    .setRefreshEndpoint(AUTHZ_TOKEN_ENDPOINT)
+                    .setAdditionalAccessParams(Sets.newHashSet(Pair.create("response_type", "code")))
+                    .setScopes(Arrays.asList("photo_upload, publish_actions"))
                     .asModule();
 
             authzModule.requestAccess(activity, new Callback<String>() {

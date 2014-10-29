@@ -79,6 +79,13 @@ public class MainActivity extends ActionBarActivity {
                     GooglePlusHelper.connect(getActivity());
                 }
             });
+
+            rootView.findViewById(R.id.facebook_button).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    FacebookHelper.connect(getActivity());
+                }
+            });
         }
     }
 }

@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:adjustViewBounds="true"
-        android:scaleType="centerCrop"
+        android:scaleType="centerInside"
         android:src="@drawable/camera_icon"
         />
 
@@ -26,29 +26,31 @@
         android:id="@+id/connect_bar"
         android:layout_alignParentBottom="true"
         android:gravity="center"
+
         android:layout_margin="16dp"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
-        <Button
-            android:layout_margin="12dp"
-            android:background="@color/blue"
+        <ImageButton
+            android:layout_weight="1"
+            android:background="#0000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Google +"
-            android:id="@+id/google_button"></Button>
-        <Button
-            android:background="@color/blue"
-            android:layout_margin="12dp"
+            android:src="@drawable/google_inactive"
+            android:id="@+id/google_button"></ImageButton>
+        <ImageButton
+            android:background="#0000"
+            android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Facebook"
-            android:id="@+id/facebook_button"></Button>
-        <Button
-            android:background="@color/blue"
-            android:layout_margin="12dp"
-            android:layout_width="wrap_content"
+            android:src="@drawable/facebook_inactive"
+            android:id="@+id/facebook_button"></ImageButton>
+        <ImageButton
+            android:background="#0000"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="KeyCloak"></Button>
+            android:layout_width="wrap_content"
+            android:src="@drawable/keycloak_inactive"
+            android:id="@+id/keycloak_button"></ImageButton>
         </LinearLayout>
 
     <TextView

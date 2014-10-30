@@ -24,11 +24,11 @@ public class GooglePlusHelper {
     private static final String AUTHZ_ENDPOINT = "/o/oauth2/auth";
     private static final String AUTHZ_TOKEN_ENDPOINT = "/o/oauth2/token";
     private static final String AUTHZ_ACCOOUNT_ID = "google-token";
-    private static final String AUTHZ_CLIENT_ID = "37850448940-bqahddol8a694oadlqnj4n2el4kr5pqk.apps.googleusercontent.com";
-    private static final String AUTHZ_CLIENT_SECRET = "6F6pPjHQT29qwvqvxzNv_Ks7";
+    private static final String AUTHZ_CLIENT_ID = "374822310857.apps.googleusercontent.com";
+    private static final String AUTHZ_CLIENT_SECRET = "brGLaQh_KRm-SvmXz2kYGASc";
     private static final String AUTHZ_REDIRECT_URL = "http://localhost";
 
-    public static void connect(final Activity activity) {
+    public static void connect(final Activity activity, final Callback callback) {
         try {
             AuthzModule authzModule = AuthorizationManager.config("GoogleDriveAuthz", OAuth2AuthorizationConfiguration.class)
                     .setBaseURL(new URL(AUTHZ_URL))
@@ -47,11 +47,13 @@ public class GooglePlusHelper {
                 public void onSuccess(String token) {
                     Log.d("TOKEN ++ ", token);
                     Toast.makeText(activity, token, Toast.LENGTH_LONG).show();
+                    callback.onSuccess(token);
                 }
 
                 @Override
                 public void onFailure(Exception e) {
                     Toast.makeText(activity.getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                    callback.onFailure(e);
                 }
             });
 

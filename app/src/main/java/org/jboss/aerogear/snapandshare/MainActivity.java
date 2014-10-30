@@ -1,14 +1,19 @@
 package org.jboss.aerogear.snapandshare;
 
-import android.app.Activity;
-import android.app.Fragment;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
+import android.view.animation.LinearInterpolator;
+import android.widget.ImageButton;
+
+import org.jboss.aerogear.android.Callback;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -16,12 +21,7 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        if (savedInstanceState == null) {
-            getFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
-                    .commit();
-        }
+        setContentView(R.layout.fragment_main);
 
     }
 
@@ -48,44 +48,112 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
+    @Override
+    protected void onStart() {
+        super.onStart();
 
-        View rootView;
+        View googleButton = findViewById(R.id.google_button);
+        View facebookButton = findViewById(R.id.facebook_button);
+        View keycloakButton = findViewById(R.id.keycloak_button);
 
-        public PlaceholderFragment() {
-        }
+        googleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final ObjectAnimator animator = beginWaitSpin(R.id.google_button);
+                animator.start();
+                GooglePlusHelper.connect(MainActivity.this, new Callback(){
 
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            return rootView;
-        }
+                    @Override
+                    public void onSuccess(Object o) {
+                        animator.end();
+                        flipImage(R.id.google_button, R.drawable.google_active);
+                    }
 
-        @Override
-        public void onAttach(Activity activity) {
-            super.onAttach(activity);
-        }
+                    @Override
+                    public void onFailure(Exception e) {
+                        animator.end();
+                        flipImage(R.id.google_button, R.drawable.google_inactive);
+                    }
+                });
 
-        @Override
-        public void onStart() {
-            super.onStart();
-            rootView.findViewById(R.id.google_button).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    GooglePlusHelper.connect(getActivity());
-                }
-            });
+            }
+        });
 
-            rootView.findViewById(R.id.facebook_button).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    FacebookHelper.connect(getActivity());
-                }
-            });
-        }
+        googleButton.setTag(new FlipTag(R.drawable.google_inactive, R.drawable.google_active));
+
+        facebookButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                flipImage(R.id.facebook_button, R.drawable.facebook_active);
+            }
+        });
+
+        facebookButton.setTag(new FlipTag(R.drawable.facebook_inactive, R.drawable.facebook_active));
+
+        keycloakButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                flipImage(R.id.keycloak_button, R.drawable.keycloak_active);
+            }
+        });
+
+        keycloakButton.setTag(new FlipTag(R.drawable.keycloak_inactive, R.drawable.keycloak_active));
+
     }
+
+
+    private void flipImage(int imageViewId, int destImage){
+
+        ImageButton imageButton = (ImageButton) findViewById(imageViewId);
+        FlipTag flipTag = (FlipTag) imageButton.getTag();
+
+        if (flipTag.from == destImage) {
+            return;
+        }
+
+        ObjectAnimator flipOut = ObjectAnimator.ofFloat(imageButton, "rotationY", 0, 90);
+        flipOut.setDuration(150);
+        flipOut.setInterpolator(new AccelerateInterpolator());
+
+        ObjectAnimator swapImage = ObjectAnimator.ofInt(imageButton, "imageResource", flipTag.from, flipTag.to);
+        swapImage.setDuration(0);
+
+        ObjectAnimator flipIn = ObjectAnimator.ofFloat(imageButton, "rotationY", 90, 0);
+        flipIn.setDuration(150);
+        flipIn.setInterpolator(new DecelerateInterpolator());
+
+
+        AnimatorSet set = new AnimatorSet();
+        set.play(flipOut).before(swapImage).before(flipIn);
+        set.start();
+        flipTag.swap();
+
+    }
+
+    ObjectAnimator beginWaitSpin(int buttonId) {
+        ImageButton imageButton = (ImageButton) findViewById(buttonId);
+        ObjectAnimator rotate = ObjectAnimator.ofFloat(imageButton, "rotation", 0, 360);
+        rotate.setDuration(900);
+        rotate.setInterpolator(new LinearInterpolator());
+        rotate.setRepeatCount(ValueAnimator.INFINITE);
+        return rotate;
+    }
+
+    private static class FlipTag{
+         int from;
+         int to;
+
+        private FlipTag(int from, int to) {
+            this.from = from;
+            this.to = to;
+        }
+
+        void swap(){
+            int temp = from;
+            from = to;
+            to = temp;
+        }
+
+    }
+
 }

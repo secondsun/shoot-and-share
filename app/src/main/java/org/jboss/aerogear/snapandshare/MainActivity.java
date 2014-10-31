@@ -3,9 +3,8 @@ package org.jboss.aerogear.snapandshare;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
-import android.content.Context;
+import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Outline;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -17,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
@@ -24,16 +24,12 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
 import org.jboss.aerogear.android.Callback;
 
 import java.io.File;
-import java.io.FileFilter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -288,9 +284,9 @@ public class MainActivity extends ActionBarActivity {
             }
         }
 
-        private final Context context;
+        private final Activity context;
 
-        public FileAdapter(Context context) {
+        public FileAdapter(Activity context) {
             this.context = context;
         }
 
@@ -317,13 +313,23 @@ public class MainActivity extends ActionBarActivity {
             if (view == null) {
                 view = LayoutInflater.from(context).inflate(R.layout.image_card, null);
             }
-            File file = getItem(position);
+            image = (ImageView) view.findViewById(R.id.image);
+            final File file = getItem(position);
+
+            image.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ImageDialogFragment fragment = ImageDialogFragment.newInstance(file);
+
+                    fragment.show(context.getFragmentManager(), "TAG!");
+                }
+            });
 
             Picasso.with(context)
                     .load(file)
                     .centerInside()
                     .resizeDimen(R.dimen.image_card_width, R.dimen.image_card_height)
-                    .into((ImageView) view.findViewById(R.id.image));
+                    .into(image);
 
             return view;
         }

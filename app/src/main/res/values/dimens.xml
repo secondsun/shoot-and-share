@@ -9,7 +9,10 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
-    <dimen name="image_card_width">100dp</dimen>
-    <dimen name="image_card_height">100dp</dimen>
+    <dimen name="image_card_width">150dp</dimen>
+    <dimen name="image_card_height">150dp</dimen>
+
+    <dimen name="image_dialog_width">150dp</dimen>
+    <dimen name="image_dialog_height">150dp</dimen>
 
 </resources>

@@ -16,7 +16,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
@@ -201,8 +200,22 @@ public class MainActivity extends ActionBarActivity {
         keycloakButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                flipImage(R.id.keycloak_button, R.drawable.keycloak_active);
-            }
+                final ObjectAnimator animator = beginWaitSpin(R.id.keycloak_button);
+                animator.start();
+                KeycloakHelper.connect(MainActivity.this, new Callback() {
+
+                    @Override
+                    public void onSuccess(Object o) {
+                        animator.end();
+                        flipImage(R.id.keycloak_button, R.drawable.keycloak_active);
+                    }
+
+                    @Override
+                    public void onFailure(Exception e) {
+                        animator.end();
+                        flipImage(R.id.keycloak_button, R.drawable.keycloak_inactive);
+                    }
+                });            }
         });
 
         keycloakButton.setTag(new FlipTag(R.drawable.keycloak_inactive, R.drawable.keycloak_active));

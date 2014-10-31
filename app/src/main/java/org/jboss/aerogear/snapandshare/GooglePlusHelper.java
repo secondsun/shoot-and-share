@@ -34,6 +34,7 @@ public class GooglePlusHelper {
                     .setBaseURL(new URL(AUTHZ_URL))
                     .setAuthzEndpoint(AUTHZ_ENDPOINT)
                     .setAccessTokenEndpoint(AUTHZ_TOKEN_ENDPOINT)
+                    .setRefreshEndpoint(AUTHZ_TOKEN_ENDPOINT)
                     .setAccountId(AUTHZ_ACCOOUNT_ID)
                     .setClientId(AUTHZ_CLIENT_ID)
                     .setClientSecret(AUTHZ_CLIENT_SECRET)

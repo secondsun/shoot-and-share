@@ -1,6 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent"
     tools:context=".MainActivity$PlaceholderFragment">
 
@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_above="@+id/connect_with"></GridView>
+        android:layout_above="@+id/connect_bar"></GridView>
 
 
     <ImageButton
@@ -34,6 +34,7 @@
         android:layout_height="@dimen/fab_size"
         android:layout_alignParentRight="true"
         android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
         android:layout_above="@+id/grid_seam"
         android:background="@drawable/ripple"
         android:padding="12dp"
@@ -53,13 +54,23 @@
     <LinearLayout
         android:id="@+id/connect_bar"
         android:layout_alignParentBottom="true"
-        android:gravity="center"
-
-        android:layout_margin="16dp"
+        android:gravity="right"
+        android:elevation="@dimen/button_elevation"
+        android:background="#FFF"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
-        <ImageButton
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@android:color/black"
             android:layout_weight="1"
+            android:gravity="left|center_vertical"
+            android:layout_margin="15dp"
+            android:fontFamily="sans-serif-thin"
+            android:textSize="18sp"
+            android:text="Connect To : "/>
+        <ImageButton
+            android:layout_margin="5dp"
             android:background="#0000"
             android:layout_height="48dp"
             android:layout_width="48dp"
@@ -68,7 +79,7 @@
             android:id="@+id/google_button"></ImageButton>
         <ImageButton
             android:background="#0000"
-            android:layout_weight="1"
+            android:layout_margin="5dp"
             android:layout_height="48dp"
             android:layout_width="48dp"
             android:scaleType="fitCenter"
@@ -76,25 +87,12 @@
             android:id="@+id/facebook_button"></ImageButton>
         <ImageButton
             android:background="#0000"
-            android:layout_weight="1"
+            android:layout_margin="5dp"
             android:layout_height="48dp"
             android:layout_width="48dp"
             android:scaleType="fitCenter"
             android:src="@drawable/keycloak_inactive"
             android:id="@+id/keycloak_button"></ImageButton>
         </LinearLayout>
-
-    <TextView
-        android:id="@+id/connect_with"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:textColor="@android:color/white"
-        android:fontFamily="sans-serif-condensed"
-        android:textSize="22sp"
-        android:shadowRadius="1"
-        android:shadowColor="@color/light_blue"
-        android:layout_above="@+id/connect_bar"
-        android:text="Connect To : " />
 
 </RelativeLayout>

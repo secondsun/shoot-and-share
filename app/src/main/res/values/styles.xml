@@ -6,8 +6,12 @@
         <item name="colorPrimary">@color/red</item><!-- Red -->
         <item name="colorPrimaryDark">@color/blue</item><!-- Blue -->
         <item name="colorAccent">@color/light_blue</item><!-- Light Blue -->
+        <item name="android:actionBarStyle">@style/ActionBar</item>
         <item name="android:textColorPrimary">@color/white</item>
     </style>
 
-
+    <style name="ActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:icon">@drawable/gear</item>
+        <item name="android:logo">@drawable/gear</item>
+    </style>
 </resources>

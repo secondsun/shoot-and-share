@@ -1,4 +1,4 @@
-package org.jboss.aerogear.snapandshare;
+package org.jboss.aerogear.snapandshare.util;
 
 import android.app.Activity;
 import android.util.Log;
@@ -13,6 +13,7 @@ import org.jboss.aerogear.android.authorization.AuthzModule;
 import org.jboss.aerogear.android.impl.authz.AuthorizationManager;
 import org.jboss.aerogear.android.impl.authz.oauth2.OAuth2AuthorizationConfiguration;
 import org.jboss.aerogear.android.impl.authz.oauth2.OAuth2AuthzModule;
+import org.jboss.aerogear.android.impl.authz.oauth2.OAuthWebViewDialog;
 
 import java.net.URL;
 import java.util.Arrays;
@@ -30,7 +31,7 @@ public class FacebookHelper {
     private static final String AUTHZ_CLIENT_SECRET = "f6053a175cd0f3ce8de64c78ca974f82";
     private static final String AUTHZ_REDIRECT_URL = "https://localhost/";
 
-    public static void connect(final Activity activity) {
+    public static void connect(final Activity activity, final Callback callback) {
         try {
             final OAuth2AuthzModule authzModule = (OAuth2AuthzModule) AuthorizationManager.config("FacebookOAuth", OAuth2AuthorizationConfiguration.class)
                     .setBaseURL(new URL("https://"))
@@ -47,14 +48,16 @@ public class FacebookHelper {
 
             authzModule.requestAccess(activity, new Callback<String>() {
                 @Override
-                public void onSuccess(String token) {
-                    Log.d("TOKEN ++ ", token);
-                    Toast.makeText(activity, token, Toast.LENGTH_LONG).show();
+                public void onSuccess(String s) {
+                    callback.onSuccess(s);
                 }
 
                 @Override
                 public void onFailure(Exception e) {
-                    Toast.makeText(activity.getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                    if (!e.getMessage().matches(OAuthWebViewDialog.OAuthReceiver.DISMISS_ERROR)) {
+                        authzModule.deleteAccount();
+                    }
+                    callback.onFailure(e);
                 }
             });
 

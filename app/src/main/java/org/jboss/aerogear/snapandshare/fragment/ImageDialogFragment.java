@@ -1,4 +1,4 @@
-package org.jboss.aerogear.snapandshare;
+package org.jboss.aerogear.snapandshare.fragment;
 
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -11,6 +11,8 @@ import android.view.Window;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
+
+import org.jboss.aerogear.snapandshare.R;
 
 import java.io.File;
 

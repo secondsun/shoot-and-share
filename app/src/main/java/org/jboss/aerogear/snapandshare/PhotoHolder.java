@@ -10,7 +10,7 @@ import java.io.File;
 public class PhotoHolder {
 
     @RecordId
-    private Integer id = null;
+    private String id = null;
 
     private File image;
 
@@ -26,11 +26,11 @@ public class PhotoHolder {
         this.image = image;
     }
 
-    public Integer getId() {
+    public String getId() {
         return null;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         //noop
     }
 }

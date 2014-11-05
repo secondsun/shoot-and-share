@@ -10,7 +10,14 @@ import org.jboss.aerogear.android.authorization.AuthzModule;
 import org.jboss.aerogear.android.impl.authz.AuthorizationManager;
 import org.jboss.aerogear.android.impl.authz.oauth2.OAuth2AuthorizationConfiguration;
 import org.jboss.aerogear.android.impl.authz.oauth2.OAuthWebViewDialog;
+import org.jboss.aerogear.android.impl.pipeline.MultipartRequestBuilder;
+import org.jboss.aerogear.android.impl.pipeline.RestfulPipeConfiguration;
+import org.jboss.aerogear.android.pipeline.Pipe;
+import org.jboss.aerogear.android.pipeline.PipeConfiguration;
+import org.jboss.aerogear.android.pipeline.PipeManager;
+import org.jboss.aerogear.snapandshare.PhotoHolder;
 
+import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
@@ -72,6 +79,25 @@ public class GooglePlusHelper {
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(e);
+        }
+    }
+
+
+    public static void upload(final File file, final Callback callback, Activity activity) {
+        PipeConfiguration config = PipeManager.config("gp-upload", RestfulPipeConfiguration.class);
+        MultipartRequestBuilder requestBuilder = new MultipartRequestBuilder();
+
+        try {
+            Pipe pipe = config.module(AuthorizationManager.getModule(MODULE_NAME))
+                    .withUrl(new URL("https://www.googleapis.com/upload/drive/v2/files"))
+                    .requestBuilder(requestBuilder)
+                    .forClass(PhotoHolder.class);
+
+            PipeManager.get("gp-upload", activity).save(new PhotoHolder(file), callback);
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+            callback.onFailure(e);
         }
     }
 

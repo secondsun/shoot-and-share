@@ -56,11 +56,57 @@ public class PhotoActivity extends ActionBarActivity {
     protected void onStart() {
         super.onStart();
         if (GooglePlusHelper.isConnected()) {
-            findViewById(R.id.google_button).setVisibility(View.VISIBLE);
+            View button = findViewById(R.id.google_button);
+            button.setVisibility(View.VISIBLE);
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    final ProgressDialog dialog = new ProgressDialog(PhotoActivity.this);
+                    dialog.setIndeterminate(true);
+                    dialog.setTitle("Uploading");
+                    dialog.show();
+                    GooglePlusHelper.upload(new File(getIntent().getStringExtra(IMAGE_PATH)), new Callback() {
+                        @Override
+                        public void onSuccess(Object o) {
+                            dialog.dismiss();
+                            Toast.makeText(PhotoActivity.this, "Uploaded", Toast.LENGTH_LONG).show();
+                        }
+
+                        @Override
+                        public void onFailure(Exception e) {
+                            dialog.dismiss();
+                            Toast.makeText(PhotoActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    }, PhotoActivity.this);
+                }
+            });
         }
 
         if (FacebookHelper.isConnected()) {
-            findViewById(R.id.facebook_button).setVisibility(View.VISIBLE);
+            View button = findViewById(R.id.facebook_button);
+            button.setVisibility(View.VISIBLE);
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    final ProgressDialog dialog = new ProgressDialog(PhotoActivity.this);
+                    dialog.setIndeterminate(true);
+                    dialog.setTitle("Uploading");
+                    dialog.show();
+                    FacebookHelper.upload(new File(getIntent().getStringExtra(IMAGE_PATH)), new Callback() {
+                        @Override
+                        public void onSuccess(Object o) {
+                            dialog.dismiss();
+                            Toast.makeText(PhotoActivity.this, "Uploaded", Toast.LENGTH_LONG).show();
+                        }
+
+                        @Override
+                        public void onFailure(Exception e) {
+                            dialog.dismiss();
+                            Toast.makeText(PhotoActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    }, PhotoActivity.this);
+                }
+            });
         }
 
         if (KeycloakHelper.isConnected()) {

@@ -2,8 +2,6 @@ package org.jboss.aerogear.snapandshare.util;
 
 
 import android.app.Activity;
-import android.util.Log;
-import android.widget.Toast;
 
 import org.jboss.aerogear.android.Callback;
 import org.jboss.aerogear.android.authorization.AuthzModule;
@@ -33,10 +31,11 @@ public class KeycloakHelper {
     private static final String AUTHZ_ACCOOUNT_ID = "keycloak-token";
     private static final String AUTHZ_CLIENT_ID = "shoot-third-party";
     private static final String AUTHZ_REDIRECT_URL = "http://oauth2callback";
+    private static final String MODULE_NAME = "KeyCloakAuthz";
 
-    public static void connect(final Activity activity, final Callback callback) {
+    static {
         try {
-            final AuthzModule authzModule = AuthorizationManager.config("KeyCloakAuthz", OAuth2AuthorizationConfiguration.class)
+            AuthorizationManager.config(MODULE_NAME, OAuth2AuthorizationConfiguration.class)
                     .setBaseURL(new URL(AUTHZ_URL))
                     .setAuthzEndpoint(AUTHZ_ENDPOINT)
                     .setAccessTokenEndpoint(ACCESS_TOKEN_ENDPOINT)
@@ -45,6 +44,14 @@ public class KeycloakHelper {
                     .setClientId(AUTHZ_CLIENT_ID)
                     .setRedirectURL(AUTHZ_REDIRECT_URL)
                     .asModule();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void connect(final Activity activity, final Callback callback) {
+        try {
+            final AuthzModule authzModule = AuthorizationManager.getModule(MODULE_NAME);
 
             authzModule.requestAccess(activity, new Callback<String>() {
                 @Override
@@ -73,7 +80,7 @@ public class KeycloakHelper {
         MultipartRequestBuilder requestBuilder = new MultipartRequestBuilder();
 
         try {
-            Pipe pipe = config.module(AuthorizationManager.getModule("KeyCloakAuthz"))
+            Pipe pipe = config.module(AuthorizationManager.getModule(MODULE_NAME))
                     .withUrl(new URL("http://192.168.1.194:8080/shoot/rest/photos"))
                     .requestBuilder(requestBuilder)
                     .forClass(PhotoHolder.class);
@@ -84,6 +91,10 @@ public class KeycloakHelper {
             e.printStackTrace();
             callback.onFailure(e);
         }
+    }
+
+    public static boolean isConnected() {
+        return AuthorizationManager.getModule(MODULE_NAME).isAuthorized();
     }
 
 }

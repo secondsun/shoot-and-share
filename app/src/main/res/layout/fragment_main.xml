@@ -2,19 +2,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
+    android:background="@color/light_blue"
     tools:context=".MainActivity$PlaceholderFragment">
 
-    <ImageView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/home_background" />
+    <!--<ImageView-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="fill_parent"-->
+        <!--android:scaleType="centerCrop"-->
+        <!--android:src="@drawable/home_background" />-->
 
 
 
     <GridView
         android:id="@+id/photo_grid"
-        android:columnWidth="90dp"
+        android:columnWidth="140dp"
         android:numColumns="auto_fit"
         android:verticalSpacing="10dp"
         android:horizontalSpacing="10dp"
@@ -25,7 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_above="@+id/connect_bar"></GridView>
+        android:layout_above="@+id/share_bar"></GridView>
 
 
     <ImageButton
@@ -38,9 +39,9 @@
         android:layout_above="@+id/grid_seam"
         android:background="@drawable/ripple"
         android:padding="12dp"
-        android:stateListAnimator="@anim/fab_anim"
         android:scaleType="fitCenter"
         android:src="@drawable/camera_icon"
+        android:stateListAnimator="@anim/fab_anim"
         android:elevation="2dp"
         />
 
@@ -52,13 +53,13 @@
         android:layout_height="1dp"/>
 
     <LinearLayout
-        android:id="@+id/connect_bar"
+        android:id="@+id/share_bar"
         android:layout_alignParentBottom="true"
         android:gravity="right"
-        android:elevation="@dimen/button_elevation"
-        android:background="#FFF"
+        android:background="@color/white"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:elevation="5dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"

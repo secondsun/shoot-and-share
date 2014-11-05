@@ -1,20 +1,17 @@
 package org.jboss.aerogear.snapandshare.util;
 
 import android.app.Activity;
-import android.util.Log;
 import android.util.Pair;
-import android.widget.Toast;
 
-import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 
 import org.jboss.aerogear.android.Callback;
-import org.jboss.aerogear.android.authorization.AuthzModule;
 import org.jboss.aerogear.android.impl.authz.AuthorizationManager;
 import org.jboss.aerogear.android.impl.authz.oauth2.OAuth2AuthorizationConfiguration;
 import org.jboss.aerogear.android.impl.authz.oauth2.OAuth2AuthzModule;
 import org.jboss.aerogear.android.impl.authz.oauth2.OAuthWebViewDialog;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
 
@@ -30,10 +27,11 @@ public class FacebookHelper {
     private static final String AUTHZ_CLIENT_ID = "310605179126239";
     private static final String AUTHZ_CLIENT_SECRET = "f6053a175cd0f3ce8de64c78ca974f82";
     private static final String AUTHZ_REDIRECT_URL = "https://localhost/";
+    private static final String MODULE_NAME = "FacebookOAuth";
 
-    public static void connect(final Activity activity, final Callback callback) {
+    static {
         try {
-            final OAuth2AuthzModule authzModule = (OAuth2AuthzModule) AuthorizationManager.config("FacebookOAuth", OAuth2AuthorizationConfiguration.class)
+            AuthorizationManager.config(MODULE_NAME, OAuth2AuthorizationConfiguration.class)
                     .setBaseURL(new URL("https://"))
                     .setAuthzEndpoint(AUTHZ_ENDPOINT)
                     .setAccessTokenEndpoint(AUTHZ_TOKEN_ENDPOINT)
@@ -45,6 +43,15 @@ public class FacebookHelper {
                     .setAdditionalAccessParams(Sets.newHashSet(Pair.create("response_type", "code")))
                     .setScopes(Arrays.asList("photo_upload, publish_actions"))
                     .asModule();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void connect(final Activity activity, final Callback callback) {
+        try {
+            final OAuth2AuthzModule authzModule = (OAuth2AuthzModule) AuthorizationManager.getModule(MODULE_NAME);
 
             authzModule.requestAccess(activity, new Callback<String>() {
                 @Override
@@ -66,6 +73,10 @@ public class FacebookHelper {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
+    }
+
+    public static boolean isConnected() {
+        return AuthorizationManager.getModule(MODULE_NAME).isAuthorized();
     }
 
 }

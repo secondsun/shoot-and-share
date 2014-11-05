@@ -3,7 +3,6 @@ package org.jboss.aerogear.snapandshare;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,23 +10,14 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
-import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.squareup.picasso.Picasso;
-
-import org.jboss.aerogear.android.Callback;
 import org.jboss.aerogear.snapandshare.adapter.FileAdapter;
-import org.jboss.aerogear.snapandshare.fragment.ImageDialogFragment;
 import org.jboss.aerogear.snapandshare.util.Callbacks;
 import org.jboss.aerogear.snapandshare.util.FacebookHelper;
 import org.jboss.aerogear.snapandshare.util.GooglePlusHelper;
@@ -166,6 +156,12 @@ public class MainActivity extends ActionBarActivity {
 
         googleButton.setTag(new FlipTag(R.drawable.google_inactive, R.drawable.google_active));
 
+        if (!GooglePlusHelper.isConnected()) {
+            googleButton.setTag(new FlipTag(R.drawable.google_inactive, R.drawable.google_active));
+        } else {
+            googleButton.setTag(new FlipTag(R.drawable.google_active, R.drawable.google_inactive));
+        }
+
         facebookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -181,6 +177,12 @@ public class MainActivity extends ActionBarActivity {
 
         facebookButton.setTag(new FlipTag(R.drawable.facebook_inactive, R.drawable.facebook_active));
 
+        if (!FacebookHelper.isConnected()) {
+            facebookButton.setTag(new FlipTag(R.drawable.facebook_inactive, R.drawable.facebook_active));
+        } else {
+            facebookButton.setTag(new FlipTag(R.drawable.facebook_active, R.drawable.facebook_inactive));
+        }
+
         keycloakButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -194,7 +196,11 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
-        keycloakButton.setTag(new FlipTag(R.drawable.keycloak_inactive, R.drawable.keycloak_active));
+        if (!KeycloakHelper.isConnected()) {
+            keycloakButton.setTag(new FlipTag(R.drawable.keycloak_inactive, R.drawable.keycloak_active));
+        } else {
+            keycloakButton.setTag(new FlipTag(R.drawable.keycloak_active, R.drawable.keycloak_inactive));
+        }
 
 
     }

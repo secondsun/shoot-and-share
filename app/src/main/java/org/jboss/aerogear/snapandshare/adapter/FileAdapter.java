@@ -1,6 +1,7 @@
 package org.jboss.aerogear.snapandshare.adapter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,14 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
-import org.jboss.aerogear.android.Callback;
+import org.jboss.aerogear.snapandshare.PhotoActivity;
 import org.jboss.aerogear.snapandshare.R;
-import org.jboss.aerogear.snapandshare.fragment.ImageDialogFragment;
-import org.jboss.aerogear.snapandshare.util.KeycloakHelper;
 
 import java.io.File;
 
@@ -73,30 +71,13 @@ public class FileAdapter  extends BaseAdapter {
         image = (ImageView) view.findViewById(R.id.image);
         final File file = getItem(position);
 
-        image.setOnClickListener(new View.OnClickListener() {
+        view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ImageDialogFragment fragment = ImageDialogFragment.newInstance(file);
 
-                fragment.show(context.getFragmentManager(), "TAG!");
-            }
-        });
-
-        view.findViewById(R.id.share_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                KeycloakHelper.upload(file, new Callback() {
-                    @Override
-                    public void onSuccess(Object o) {
-                        Toast.makeText(context, "success", Toast.LENGTH_LONG).show();
-                    }
-
-                    @Override
-                    public void onFailure(Exception e) {
-                        Log.e("ERROR", e.getMessage(), e);
-                        Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-                }, context);
+                Intent photoActivityIntent = new Intent(context, PhotoActivity.class);
+                photoActivityIntent.putExtra(PhotoActivity.IMAGE_PATH, file.getAbsolutePath());
+                context.startActivity(photoActivityIntent);
             }
         });
 

@@ -24,6 +24,8 @@
         </activity>
 
         <service android:name="org.jboss.aerogear.android.impl.authz.oauth2.OAuth2AuthzService" />
+        <service android:name=".service.UploadService" />
+
 
         <activity
             android:name="org.jboss.aerogear.snapandshare.PhotoActivity"

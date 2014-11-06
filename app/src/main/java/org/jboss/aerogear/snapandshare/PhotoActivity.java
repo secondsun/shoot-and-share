@@ -17,7 +17,7 @@
 
 package org.jboss.aerogear.snapandshare;
 
-import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -27,19 +27,15 @@ import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 
-import org.jboss.aerogear.snapandshare.callback.UploadImageCallback;
+import org.jboss.aerogear.snapandshare.service.UploadService;
 import org.jboss.aerogear.snapandshare.util.FacebookHelper;
 import org.jboss.aerogear.snapandshare.util.GooglePlusHelper;
 import org.jboss.aerogear.snapandshare.util.KeycloakHelper;
-
-import java.io.File;
 
 
 public class PhotoActivity extends ActionBarActivity {
 
     public static final String IMAGE_PATH = "PhotoActivity.IMAGE_PATH";
-
-    public ProgressDialog dialog = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,8 +75,10 @@ public class PhotoActivity extends ActionBarActivity {
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    dialog = ProgressDialog.show(PhotoActivity.this, "Uploading", "Photo upload in progress", false);
-                    GooglePlusHelper.upload(new File(getIntent().getStringExtra(IMAGE_PATH)), new UploadImageCallback(), PhotoActivity.this);
+                    Intent shareIntent = new Intent(PhotoActivity.this, UploadService.class);
+                    shareIntent.putExtra(UploadService.FILE_URI, getIntent().getStringExtra(IMAGE_PATH));
+                    shareIntent.putExtra(UploadService.PROVIDER, UploadService.PROVIDERS.GOOGLE.name());
+                    startService(shareIntent);
                 }
             });
         }
@@ -91,8 +89,10 @@ public class PhotoActivity extends ActionBarActivity {
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    dialog = ProgressDialog.show(PhotoActivity.this, "Uploading", "Photo upload in progress", false);
-                    FacebookHelper.upload(new File(getIntent().getStringExtra(IMAGE_PATH)), new UploadImageCallback(), PhotoActivity.this);
+                    Intent shareIntent = new Intent(PhotoActivity.this, UploadService.class);
+                    shareIntent.putExtra(UploadService.FILE_URI, getIntent().getStringExtra(IMAGE_PATH));
+                    shareIntent.putExtra(UploadService.PROVIDER, UploadService.PROVIDERS.FACEBOOK.name());
+                    startService(shareIntent);
                 }
             });
         }
@@ -103,8 +103,10 @@ public class PhotoActivity extends ActionBarActivity {
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    dialog = ProgressDialog.show(PhotoActivity.this, "Uploading", "Photo upload in progress", false);
-                    KeycloakHelper.upload(new File(getIntent().getStringExtra(IMAGE_PATH)), new UploadImageCallback(), PhotoActivity.this);
+                    Intent shareIntent = new Intent(PhotoActivity.this, UploadService.class);
+                    shareIntent.putExtra(UploadService.FILE_URI, getIntent().getStringExtra(IMAGE_PATH));
+                    shareIntent.putExtra(UploadService.PROVIDER, UploadService.PROVIDERS.KEYCLOAK.name());
+                    startService(shareIntent);
                 }
             });
 

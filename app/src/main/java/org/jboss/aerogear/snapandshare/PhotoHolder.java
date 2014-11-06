@@ -21,9 +21,6 @@ import org.jboss.aerogear.android.RecordId;
 
 import java.io.File;
 
-/**
- * Created by summers on 11/3/14.
- */
 public class PhotoHolder {
 
     @RecordId

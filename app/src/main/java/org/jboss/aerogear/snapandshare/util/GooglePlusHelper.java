@@ -27,7 +27,6 @@ import org.jboss.aerogear.android.authorization.AuthzModule;
 import org.jboss.aerogear.android.impl.authz.AuthorizationManager;
 import org.jboss.aerogear.android.impl.authz.oauth2.OAuth2AuthorizationConfiguration;
 import org.jboss.aerogear.android.impl.authz.oauth2.OAuthWebViewDialog;
-import org.jboss.aerogear.android.impl.pipeline.MultipartRequestBuilder;
 import org.jboss.aerogear.android.impl.pipeline.RestfulPipeConfiguration;
 import org.jboss.aerogear.android.pipeline.PipeManager;
 import org.jboss.aerogear.snapandshare.PhotoHolder;
@@ -68,8 +67,8 @@ public class GooglePlusHelper {
 
             PipeManager.config("gp-upload", RestfulPipeConfiguration.class)
                     .module(AuthorizationManager.getModule(MODULE_NAME))
-                    .withUrl(new URL("https://www.googleapis.com/upload/drive/v2/files"))
-                    .requestBuilder(new MultipartRequestBuilder())
+                    .withUrl(new URL("https://www.googleapis.com/upload/drive/v2/files?uploadType=multipart"))
+                    .requestBuilder(new GoogleDriveFileUploadRequestBuilder())
                     .forClass(PhotoHolder.class);
 
 

@@ -29,10 +29,12 @@ public class PhotoHolder {
     @RecordId
     private String id = null;
 
+    private String title, message;
     private File image;
 
     public PhotoHolder(File image) {
         this.image = image;
+        title = message = image.getName();
     }
 
     public File getImage() {
@@ -49,5 +51,21 @@ public class PhotoHolder {
 
     public void setId(String id) {
         //noop
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

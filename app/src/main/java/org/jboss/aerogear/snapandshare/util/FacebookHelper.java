@@ -12,8 +12,6 @@ import org.jboss.aerogear.android.impl.authz.oauth2.OAuth2AuthzModule;
 import org.jboss.aerogear.android.impl.authz.oauth2.OAuthWebViewDialog;
 import org.jboss.aerogear.android.impl.pipeline.MultipartRequestBuilder;
 import org.jboss.aerogear.android.impl.pipeline.RestfulPipeConfiguration;
-import org.jboss.aerogear.android.pipeline.Pipe;
-import org.jboss.aerogear.android.pipeline.PipeConfiguration;
 import org.jboss.aerogear.android.pipeline.PipeManager;
 import org.jboss.aerogear.snapandshare.PhotoHolder;
 
@@ -50,6 +48,12 @@ public class FacebookHelper {
                     .setAdditionalAccessParams(Sets.newHashSet(Pair.create("response_type", "code")))
                     .setScopes(Arrays.asList("photo_upload, publish_actions"))
                     .asModule();
+
+            PipeManager.config("fb-upload", RestfulPipeConfiguration.class).module(AuthorizationManager.getModule(MODULE_NAME))
+                    .withUrl(new URL("https://graph.facebook.com/me/photos"))
+                    .requestBuilder( new MultipartRequestBuilder())
+                    .forClass(PhotoHolder.class);
+
         } catch (MalformedURLException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
@@ -83,21 +87,7 @@ public class FacebookHelper {
     }
 
     public static void upload(final File file, final Callback callback, Activity activity) {
-        PipeConfiguration config = PipeManager.config("fb-upload", RestfulPipeConfiguration.class);
-        MultipartRequestBuilder requestBuilder = new MultipartRequestBuilder();
-
-        try {
-            Pipe pipe = config.module(AuthorizationManager.getModule(MODULE_NAME))
-                    .withUrl(new URL("https://graph.facebook.com/me/photos"))
-                    .requestBuilder(requestBuilder)
-                    .forClass(PhotoHolder.class);
-
             PipeManager.get("fb-upload", activity).save(new PhotoHolder(file), callback);
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-            callback.onFailure(e);
-        }
     }
 
     public static boolean isConnected() {

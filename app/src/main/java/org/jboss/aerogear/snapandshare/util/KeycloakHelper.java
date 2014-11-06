@@ -10,13 +10,10 @@ import org.jboss.aerogear.android.impl.authz.oauth2.OAuth2AuthorizationConfigura
 import org.jboss.aerogear.android.impl.authz.oauth2.OAuthWebViewDialog;
 import org.jboss.aerogear.android.impl.pipeline.MultipartRequestBuilder;
 import org.jboss.aerogear.android.impl.pipeline.RestfulPipeConfiguration;
-import org.jboss.aerogear.android.pipeline.Pipe;
-import org.jboss.aerogear.android.pipeline.PipeConfiguration;
 import org.jboss.aerogear.android.pipeline.PipeManager;
 import org.jboss.aerogear.snapandshare.PhotoHolder;
 
 import java.io.File;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
@@ -44,6 +41,12 @@ public class KeycloakHelper {
                     .setClientId(AUTHZ_CLIENT_ID)
                     .setRedirectURL(AUTHZ_REDIRECT_URL)
                     .asModule();
+
+            PipeManager.config("kc-upload", RestfulPipeConfiguration.class).module(AuthorizationManager.getModule(MODULE_NAME))
+                    .withUrl(new URL("http://192.168.1.194:8080/shoot/rest/photos"))
+                    .requestBuilder(new MultipartRequestBuilder())
+                    .forClass(PhotoHolder.class);
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -76,21 +79,7 @@ public class KeycloakHelper {
     }
 
     public static void upload(final File file, final Callback callback, Activity activity) {
-        PipeConfiguration config = PipeManager.config("kc-upload", RestfulPipeConfiguration.class);
-        MultipartRequestBuilder requestBuilder = new MultipartRequestBuilder();
-
-        try {
-            Pipe pipe = config.module(AuthorizationManager.getModule(MODULE_NAME))
-                    .withUrl(new URL("http://192.168.1.194:8080/shoot/rest/photos"))
-                    .requestBuilder(requestBuilder)
-                    .forClass(PhotoHolder.class);
-
-            PipeManager.get("kc-upload", activity).save(new PhotoHolder(file), callback);
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-            callback.onFailure(e);
-        }
+        PipeManager.get("kc-upload", activity).save(new PhotoHolder(file), callback);
     }
 
     public static boolean isConnected() {

@@ -7,11 +7,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
-import org.jboss.aerogear.android.Callback;
+import org.jboss.aerogear.snapandshare.callback.UploadImageCallback;
 import org.jboss.aerogear.snapandshare.util.FacebookHelper;
 import org.jboss.aerogear.snapandshare.util.GooglePlusHelper;
 import org.jboss.aerogear.snapandshare.util.KeycloakHelper;
@@ -22,6 +21,8 @@ import java.io.File;
 public class PhotoActivity extends ActionBarActivity {
 
     public static final String IMAGE_PATH = "PhotoActivity.IMAGE_PATH";
+
+    public ProgressDialog dialog = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,23 +62,8 @@ public class PhotoActivity extends ActionBarActivity {
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    final ProgressDialog dialog = new ProgressDialog(PhotoActivity.this);
-                    dialog.setIndeterminate(true);
-                    dialog.setTitle("Uploading");
-                    dialog.show();
-                    GooglePlusHelper.upload(new File(getIntent().getStringExtra(IMAGE_PATH)), new Callback() {
-                        @Override
-                        public void onSuccess(Object o) {
-                            dialog.dismiss();
-                            Toast.makeText(PhotoActivity.this, "Uploaded", Toast.LENGTH_LONG).show();
-                        }
-
-                        @Override
-                        public void onFailure(Exception e) {
-                            dialog.dismiss();
-                            Toast.makeText(PhotoActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-                        }
-                    }, PhotoActivity.this);
+                    dialog = ProgressDialog.show(PhotoActivity.this, "Uploading", "Photo upload in progress", false);
+                    GooglePlusHelper.upload(new File(getIntent().getStringExtra(IMAGE_PATH)), new UploadImageCallback(), PhotoActivity.this);
                 }
             });
         }
@@ -88,23 +74,8 @@ public class PhotoActivity extends ActionBarActivity {
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    final ProgressDialog dialog = new ProgressDialog(PhotoActivity.this);
-                    dialog.setIndeterminate(true);
-                    dialog.setTitle("Uploading");
-                    dialog.show();
-                    FacebookHelper.upload(new File(getIntent().getStringExtra(IMAGE_PATH)), new Callback() {
-                        @Override
-                        public void onSuccess(Object o) {
-                            dialog.dismiss();
-                            Toast.makeText(PhotoActivity.this, "Uploaded", Toast.LENGTH_LONG).show();
-                        }
-
-                        @Override
-                        public void onFailure(Exception e) {
-                            dialog.dismiss();
-                            Toast.makeText(PhotoActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-                        }
-                    }, PhotoActivity.this);
+                    dialog = ProgressDialog.show(PhotoActivity.this, "Uploading", "Photo upload in progress", false);
+                    FacebookHelper.upload(new File(getIntent().getStringExtra(IMAGE_PATH)), new UploadImageCallback(), PhotoActivity.this);
                 }
             });
         }
@@ -115,23 +86,8 @@ public class PhotoActivity extends ActionBarActivity {
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    final ProgressDialog dialog = new ProgressDialog(PhotoActivity.this);
-                    dialog.setIndeterminate(true);
-                    dialog.setTitle("Uploading");
-                    dialog.show();
-                    KeycloakHelper.upload(new File(getIntent().getStringExtra(IMAGE_PATH)), new Callback() {
-                        @Override
-                        public void onSuccess(Object o) {
-                            dialog.dismiss();
-                            Toast.makeText(PhotoActivity.this, "Uploaded", Toast.LENGTH_LONG).show();
-                        }
-
-                        @Override
-                        public void onFailure(Exception e) {
-                            dialog.dismiss();
-                            Toast.makeText(PhotoActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-                        }
-                    }, PhotoActivity.this);
+                    dialog = ProgressDialog.show(PhotoActivity.this, "Uploading", "Photo upload in progress", false);
+                    KeycloakHelper.upload(new File(getIntent().getStringExtra(IMAGE_PATH)), new UploadImageCallback(), PhotoActivity.this);
                 }
             });
 

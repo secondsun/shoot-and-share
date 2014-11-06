@@ -18,7 +18,7 @@ import android.widget.GridView;
 import android.widget.ImageButton;
 
 import org.jboss.aerogear.snapandshare.adapter.FileAdapter;
-import org.jboss.aerogear.snapandshare.util.Callbacks;
+import org.jboss.aerogear.snapandshare.callback.Callbacks;
 import org.jboss.aerogear.snapandshare.util.FacebookHelper;
 import org.jboss.aerogear.snapandshare.util.GooglePlusHelper;
 import org.jboss.aerogear.snapandshare.util.KeycloakHelper;

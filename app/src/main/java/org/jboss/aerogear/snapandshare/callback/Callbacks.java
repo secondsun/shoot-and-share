@@ -1,4 +1,4 @@
-package org.jboss.aerogear.snapandshare.util;
+package org.jboss.aerogear.snapandshare.callback;
 
 import android.animation.ObjectAnimator;
 

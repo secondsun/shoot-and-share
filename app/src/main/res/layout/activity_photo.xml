@@ -29,7 +29,7 @@
             android:layout_margin="15dp"
             android:fontFamily="sans-serif-thin"
             android:textSize="18sp"
-            android:text="Share On : "/>
+            android:text="@string/share_on"/>
         <ImageButton
             android:layout_margin="5dp"
             android:background="#0000"

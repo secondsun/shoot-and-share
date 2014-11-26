@@ -20,8 +20,6 @@ package org.jboss.aerogear.snapandshare.util;
 import android.app.Activity;
 import android.util.Pair;
 
-import com.google.common.collect.ImmutableSet;
-
 import org.jboss.aerogear.android.Callback;
 import org.jboss.aerogear.android.authorization.AuthzModule;
 import org.jboss.aerogear.android.impl.authz.AuthorizationManager;
@@ -35,6 +33,8 @@ import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Set;
 
 /**
  * Created by summers on 10/27/14.
@@ -52,6 +52,7 @@ public class GooglePlusHelper {
 
     static {
         try {
+
             AuthorizationManager.config(MODULE_NAME, OAuth2AuthorizationConfiguration.class)
                     .setBaseURL(new URL(AUTHZ_URL))
                     .setAuthzEndpoint(AUTHZ_ENDPOINT)
@@ -62,7 +63,7 @@ public class GooglePlusHelper {
                     .setClientSecret(AUTHZ_CLIENT_SECRET)
                     .setRedirectURL(AUTHZ_REDIRECT_URL)
                     .setScopes(Arrays.asList("https://www.googleapis.com/auth/drive"))
-                    .setAdditionalAuthorizationParams(ImmutableSet.of(Pair.create("access_type", "offline")))
+                    .addAdditionalAuthorizationParam(Pair.create("access_type", "offline"))
                     .asModule();
 
             PipeManager.config("gp-upload", RestfulPipeConfiguration.class)

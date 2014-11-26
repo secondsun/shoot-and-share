@@ -20,8 +20,6 @@ package org.jboss.aerogear.snapandshare.util;
 import android.app.Activity;
 import android.util.Pair;
 
-import com.google.common.collect.Sets;
-
 import org.jboss.aerogear.android.Callback;
 import org.jboss.aerogear.android.impl.authz.AuthorizationManager;
 import org.jboss.aerogear.android.impl.authz.oauth2.OAuth2AuthorizationConfiguration;
@@ -36,6 +34,8 @@ import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Set;
 
 /**
  * Created by summers on 10/28/14.
@@ -53,6 +53,7 @@ public class FacebookHelper {
 
     static {
         try {
+
             AuthorizationManager.config(MODULE_NAME, OAuth2AuthorizationConfiguration.class)
                     .setBaseURL(new URL("https://"))
                     .setAuthzEndpoint(AUTHZ_ENDPOINT)
@@ -62,7 +63,7 @@ public class FacebookHelper {
                     .setClientSecret(AUTHZ_CLIENT_SECRET)
                     .setRedirectURL(AUTHZ_REDIRECT_URL)
                     .setRefreshEndpoint(AUTHZ_TOKEN_ENDPOINT)
-                    .setAdditionalAccessParams(Sets.newHashSet(Pair.create("response_type", "code")))
+                    .addAdditionalAccessParam(Pair.create("response_type", "code"))
                     .setScopes(Arrays.asList("photo_upload, publish_actions"))
                     .asModule();
 

@@ -28,8 +28,6 @@ import android.os.HandlerThread;
 import android.os.IBinder;
 import android.util.Log;
 
-import com.google.common.base.Strings;
-
 import org.jboss.aerogear.android.pipeline.PipeManager;
 import org.jboss.aerogear.snapandshare.PhotoHolder;
 import org.jboss.aerogear.snapandshare.R;
@@ -72,12 +70,12 @@ public final class UploadService extends Service {
                     String fileName = extras.getString(FILE_URI);
                     String providerName = extras.getString(PROVIDER);
 
-                    if (Strings.isNullOrEmpty(fileName)) {
+                    if (fileName == null) {
                         displayErrorNotification("No file provided", 0);
                         return;
                     }
 
-                    if (Strings.isNullOrEmpty(providerName)) {
+                    if (providerName == null) {
                         displayErrorNotification("No provider selected", 0);
                         return;
                     }

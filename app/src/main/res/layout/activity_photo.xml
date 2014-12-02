@@ -27,7 +27,7 @@
             style="@style/social_icon_vertical"
             android:contentDescription="@string/keycloak_icon"
             android:background="#014e7c"
-            android:src="@drawable/ic_keycloack" />
+            android:src="@drawable/ic_keycloak" />
 
         <ImageView
             style="@style/social_icon_vertical"

@@ -23,8 +23,6 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.widget.ImageView;
 
-import com.squareup.picasso.Picasso;
-
 public class PhotoActivity extends ActionBarActivity {
 
     @Override

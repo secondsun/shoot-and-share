@@ -17,7 +17,6 @@
 
 package org.jboss.aerogear.snapandshare.util;
 
-
 import android.app.Activity;
 
 import org.jboss.aerogear.android.Callback;
@@ -33,9 +32,6 @@ import org.jboss.aerogear.snapandshare.PhotoHolder;
 import java.io.File;
 import java.net.URL;
 
-/**
- * Created by summers on 10/31/14.
- */
 public class KeycloakHelper {
 
     private static final String AUTHZ_URL = "http://192.168.1.194:8080/auth";

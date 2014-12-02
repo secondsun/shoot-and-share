@@ -36,9 +36,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Set;
 
-/**
- * Created by summers on 10/27/14.
- */
 public class GooglePlusHelper {
 
     private static final String AUTHZ_URL = "https://accounts.google.com";

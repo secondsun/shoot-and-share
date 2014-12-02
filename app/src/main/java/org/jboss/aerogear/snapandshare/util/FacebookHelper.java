@@ -37,9 +37,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Set;
 
-/**
- * Created by summers on 10/28/14.
- */
 public class FacebookHelper {
 
 

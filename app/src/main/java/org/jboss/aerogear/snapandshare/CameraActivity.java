@@ -185,7 +185,6 @@ public class CameraActivity extends ActionBarActivity implements SurfaceHolder.C
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
-            } finally {
             }
 
         }

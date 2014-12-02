@@ -8,6 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:contentDescription="@string/picture"
         android:rotation="90"
         android:scaleType="centerCrop" />
 
@@ -18,16 +19,19 @@
 
         <ImageView
             style="@style/social_icon_vertical"
+            android:contentDescription="@string/google_plus_icon"
             android:background="#dd4b39"
             android:src="@drawable/ic_google_plus" />
 
         <ImageView
             style="@style/social_icon_vertical"
+            android:contentDescription="@string/keycloak_icon"
             android:background="#014e7c"
             android:src="@drawable/ic_keycloack" />
 
         <ImageView
             style="@style/social_icon_vertical"
+            android:contentDescription="@string/facebook_icon"
             android:background="#3b5998"
             android:src="@drawable/ic_facebook" />
 

@@ -17,25 +17,15 @@
 
 package org.jboss.aerogear.snapandshare;
 
-import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 
-import org.jboss.aerogear.snapandshare.service.UploadService;
-import org.jboss.aerogear.snapandshare.util.FacebookHelper;
-import org.jboss.aerogear.snapandshare.util.GooglePlusHelper;
-import org.jboss.aerogear.snapandshare.util.KeycloakHelper;
-
-
 public class PhotoActivity extends ActionBarActivity {
-
-    public static final String IMAGE_PATH = "PhotoActivity.IMAGE_PATH";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,60 +34,14 @@ public class PhotoActivity extends ActionBarActivity {
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        if (GooglePlusHelper.isConnected()) {
-            View button = findViewById(R.id.google_button);
-            button.setVisibility(View.VISIBLE);
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent shareIntent = new Intent(PhotoActivity.this, UploadService.class);
-                    shareIntent.putExtra(UploadService.FILE_URI, getIntent().getStringExtra(IMAGE_PATH));
-                    shareIntent.putExtra(UploadService.PROVIDER, UploadService.PROVIDERS.GOOGLE.name());
-                    startService(shareIntent);
-                }
-            });
-        }
-
-        if (FacebookHelper.isConnected()) {
-            View button = findViewById(R.id.facebook_button);
-            button.setVisibility(View.VISIBLE);
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent shareIntent = new Intent(PhotoActivity.this, UploadService.class);
-                    shareIntent.putExtra(UploadService.FILE_URI, getIntent().getStringExtra(IMAGE_PATH));
-                    shareIntent.putExtra(UploadService.PROVIDER, UploadService.PROVIDERS.FACEBOOK.name());
-                    startService(shareIntent);
-                }
-            });
-        }
-
-        if (KeycloakHelper.isConnected()) {
-            View button = findViewById(R.id.keycloak_button);
-            button.setVisibility(View.VISIBLE);
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent shareIntent = new Intent(PhotoActivity.this, UploadService.class);
-                    shareIntent.putExtra(UploadService.FILE_URI, getIntent().getStringExtra(IMAGE_PATH));
-                    shareIntent.putExtra(UploadService.PROVIDER, UploadService.PROVIDERS.KEYCLOAK.name());
-                    startService(shareIntent);
-                }
-            });
-
-        }
-
-    }
-
-    @Override
     protected void onResume() {
         super.onResume();
 
+        String photo = getIntent().getStringExtra("PHOTO");
+        Bitmap bitmap = BitmapFactory.decodeFile(photo);
 
         ImageView imageView = (ImageView) findViewById(R.id.image);
-        String imagePath = getIntent().getStringExtra(IMAGE_PATH);
-        Picasso.with(this).load("file:"+imagePath).fit().centerInside().into(imageView);
+        imageView.setImageBitmap(bitmap);
     }
+
 }

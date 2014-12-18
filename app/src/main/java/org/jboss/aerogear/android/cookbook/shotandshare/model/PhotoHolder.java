@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.jboss.aerogear.android.cookbook.shotandshare;
+package org.jboss.aerogear.android.cookbook.shotandshare.model;
 
 import org.jboss.aerogear.android.RecordId;
 

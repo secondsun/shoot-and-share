@@ -24,7 +24,7 @@ import com.google.gson.JsonPrimitive;
 
 import org.jboss.aerogear.android.impl.pipeline.MultipartRequestBuilder;
 import org.jboss.aerogear.android.pipeline.TypeAndStream;
-import org.jboss.aerogear.android.cookbook.shotandshare.PhotoHolder;
+import org.jboss.aerogear.android.cookbook.shotandshare.model.PhotoHolder;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;

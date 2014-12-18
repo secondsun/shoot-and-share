@@ -27,7 +27,7 @@ import org.jboss.aerogear.android.impl.authz.oauth2.OAuth2AuthorizationConfigura
 import org.jboss.aerogear.android.impl.authz.oauth2.OAuthWebViewDialog;
 import org.jboss.aerogear.android.impl.pipeline.RestfulPipeConfiguration;
 import org.jboss.aerogear.android.pipeline.PipeManager;
-import org.jboss.aerogear.android.cookbook.shotandshare.PhotoHolder;
+import org.jboss.aerogear.android.cookbook.shotandshare.model.PhotoHolder;
 
 import java.io.File;
 import java.net.MalformedURLException;

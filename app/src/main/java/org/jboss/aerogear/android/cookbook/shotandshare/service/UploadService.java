@@ -29,7 +29,7 @@ import android.os.IBinder;
 import android.util.Log;
 
 import org.jboss.aerogear.android.pipeline.PipeManager;
-import org.jboss.aerogear.android.cookbook.shotandshare.PhotoHolder;
+import org.jboss.aerogear.android.cookbook.shotandshare.model.PhotoHolder;
 import org.jboss.aerogear.android.cookbook.shotandshare.R;
 
 import java.io.File;

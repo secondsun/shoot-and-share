@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.jboss.aerogear.snapandshare.util;
+package org.jboss.aerogear.android.cookbook.shotandshare.util;
 
 import android.app.Activity;
 import android.util.Pair;
@@ -27,7 +27,7 @@ import org.jboss.aerogear.android.impl.authz.oauth2.OAuth2AuthorizationConfigura
 import org.jboss.aerogear.android.impl.authz.oauth2.OAuthWebViewDialog;
 import org.jboss.aerogear.android.impl.pipeline.RestfulPipeConfiguration;
 import org.jboss.aerogear.android.pipeline.PipeManager;
-import org.jboss.aerogear.snapandshare.PhotoHolder;
+import org.jboss.aerogear.android.cookbook.shotandshare.PhotoHolder;
 
 import java.io.File;
 import java.net.MalformedURLException;

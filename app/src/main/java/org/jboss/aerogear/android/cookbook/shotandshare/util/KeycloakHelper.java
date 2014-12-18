@@ -15,67 +15,59 @@
  * limitations under the License.
  */
 
-package org.jboss.aerogear.snapandshare.util;
+package org.jboss.aerogear.android.cookbook.shotandshare.util;
 
 import android.app.Activity;
-import android.util.Pair;
 
 import org.jboss.aerogear.android.Callback;
+import org.jboss.aerogear.android.authorization.AuthzModule;
 import org.jboss.aerogear.android.impl.authz.AuthorizationManager;
 import org.jboss.aerogear.android.impl.authz.oauth2.OAuth2AuthorizationConfiguration;
-import org.jboss.aerogear.android.impl.authz.oauth2.OAuth2AuthzModule;
 import org.jboss.aerogear.android.impl.authz.oauth2.OAuthWebViewDialog;
 import org.jboss.aerogear.android.impl.pipeline.MultipartRequestBuilder;
 import org.jboss.aerogear.android.impl.pipeline.RestfulPipeConfiguration;
 import org.jboss.aerogear.android.pipeline.PipeManager;
-import org.jboss.aerogear.snapandshare.PhotoHolder;
+import org.jboss.aerogear.android.cookbook.shotandshare.PhotoHolder;
 
 import java.io.File;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Arrays;
 
-public class FacebookHelper {
+public class KeycloakHelper {
 
-
-    private static final String AUTHZ_ENDPOINT = "www.facebook.com/dialog/oauth";
-    private static final String AUTHZ_TOKEN_ENDPOINT = "graph.facebook.com/oauth/access_token";
-    private static final String AUTHZ_ACCOOUNT_ID = "facebook-token";
-    private static final String AUTHZ_CLIENT_ID = "310605179126239";
-    private static final String AUTHZ_CLIENT_SECRET = "f6053a175cd0f3ce8de64c78ca974f82";
-    private static final String AUTHZ_REDIRECT_URL = "https://localhost/";
-    private static final String MODULE_NAME = "FacebookOAuth";
+    private static final String AUTHZ_URL = "http://192.168.1.194:8080/auth";
+    private static final String AUTHZ_ENDPOINT = "/realms/shoot-realm/tokens/login";
+    private static final String ACCESS_TOKEN_ENDPOINT = "/realms/shoot-realm/tokens/access/codes";
+    private static final String REFRESH_TOKEN_ENDPOINT = "/realms/shoot-realm/tokens/refresh";
+    private static final String AUTHZ_ACCOOUNT_ID = "keycloak-token";
+    private static final String AUTHZ_CLIENT_ID = "shoot-third-party";
+    private static final String AUTHZ_REDIRECT_URL = "http://oauth2callback";
+    private static final String MODULE_NAME = "KeyCloakAuthz";
 
     static {
         try {
-
             AuthorizationManager.config(MODULE_NAME, OAuth2AuthorizationConfiguration.class)
-                    .setBaseURL(new URL("https://"))
+                    .setBaseURL(new URL(AUTHZ_URL))
                     .setAuthzEndpoint(AUTHZ_ENDPOINT)
-                    .setAccessTokenEndpoint(AUTHZ_TOKEN_ENDPOINT)
+                    .setAccessTokenEndpoint(ACCESS_TOKEN_ENDPOINT)
+                    .setRefreshEndpoint(REFRESH_TOKEN_ENDPOINT)
                     .setAccountId(AUTHZ_ACCOOUNT_ID)
                     .setClientId(AUTHZ_CLIENT_ID)
-                    .setClientSecret(AUTHZ_CLIENT_SECRET)
                     .setRedirectURL(AUTHZ_REDIRECT_URL)
-                    .setRefreshEndpoint(AUTHZ_TOKEN_ENDPOINT)
-                    .addAdditionalAccessParam(Pair.create("response_type", "code"))
-                    .setScopes(Arrays.asList("photo_upload, publish_actions"))
                     .asModule();
 
-            PipeManager.config("fb-upload", RestfulPipeConfiguration.class).module(AuthorizationManager.getModule(MODULE_NAME))
-                    .withUrl(new URL("https://graph.facebook.com/me/photos"))
-                    .requestBuilder( new MultipartRequestBuilder())
+            PipeManager.config("kc-upload", RestfulPipeConfiguration.class).module(AuthorizationManager.getModule(MODULE_NAME))
+                    .withUrl(new URL("http://192.168.1.194:8080/shoot/rest/photos"))
+                    .requestBuilder(new MultipartRequestBuilder())
                     .forClass(PhotoHolder.class);
 
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
     public static void connect(final Activity activity, final Callback callback) {
         try {
-            final OAuth2AuthzModule authzModule = (OAuth2AuthzModule) AuthorizationManager.getModule(MODULE_NAME);
+            final AuthzModule authzModule = AuthorizationManager.getModule(MODULE_NAME);
 
             authzModule.requestAccess(activity, new Callback<String>() {
                 @Override
@@ -100,7 +92,7 @@ public class FacebookHelper {
     }
 
     public static void upload(final File file, final Callback callback, Activity activity) {
-            PipeManager.get("fb-upload", activity).save(new PhotoHolder(file), callback);
+        PipeManager.get("kc-upload", activity).save(new PhotoHolder(file), callback);
     }
 
     public static boolean isConnected() {

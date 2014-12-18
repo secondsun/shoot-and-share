@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.jboss.aerogear.snapandshare;
+package org.jboss.aerogear.android.cookbook.shotandshare;
 
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -28,6 +28,8 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.ImageView;
+
+import org.jboss.aerogear.android.cookbook.shotandshare.R;
 
 import java.io.File;
 import java.io.FileNotFoundException;

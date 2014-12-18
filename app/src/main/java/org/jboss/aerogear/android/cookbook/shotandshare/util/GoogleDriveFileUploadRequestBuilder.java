@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.aerogear.snapandshare.util;
+package org.jboss.aerogear.android.cookbook.shotandshare.util;
 
 import android.util.Log;
 import android.webkit.MimeTypeMap;
@@ -24,7 +24,7 @@ import com.google.gson.JsonPrimitive;
 
 import org.jboss.aerogear.android.impl.pipeline.MultipartRequestBuilder;
 import org.jboss.aerogear.android.pipeline.TypeAndStream;
-import org.jboss.aerogear.snapandshare.PhotoHolder;
+import org.jboss.aerogear.android.cookbook.shotandshare.PhotoHolder;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;

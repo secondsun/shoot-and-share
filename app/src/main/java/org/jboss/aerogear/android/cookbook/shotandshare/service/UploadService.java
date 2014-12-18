@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.aerogear.snapandshare.service;
+package org.jboss.aerogear.android.cookbook.shotandshare.service;
 
 
 import android.app.Notification;
@@ -29,8 +29,8 @@ import android.os.IBinder;
 import android.util.Log;
 
 import org.jboss.aerogear.android.pipeline.PipeManager;
-import org.jboss.aerogear.snapandshare.PhotoHolder;
-import org.jboss.aerogear.snapandshare.R;
+import org.jboss.aerogear.android.cookbook.shotandshare.PhotoHolder;
+import org.jboss.aerogear.android.cookbook.shotandshare.R;
 
 import java.io.File;
 import java.util.concurrent.atomic.AtomicInteger;

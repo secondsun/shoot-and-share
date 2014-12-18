@@ -15,13 +15,15 @@
  * limitations under the License.
  */
 
-package org.jboss.aerogear.snapandshare;
+package org.jboss.aerogear.android.cookbook.shotandshare;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.widget.ImageView;
+
+import org.jboss.aerogear.android.cookbook.shotandshare.R;
 
 public class PhotoActivity extends ActionBarActivity {
 

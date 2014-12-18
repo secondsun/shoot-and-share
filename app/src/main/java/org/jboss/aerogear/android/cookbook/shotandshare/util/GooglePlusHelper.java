@@ -40,10 +40,10 @@ public class GooglePlusHelper {
     private static final String AUTHZ_ENDPOINT = "/o/oauth2/auth";
     private static final String AUTHZ_TOKEN_ENDPOINT = "/o/oauth2/token";
     private static final String AUTHZ_ACCOOUNT_ID = "google-token";
-    private static final String AUTHZ_CLIENT_ID = "374822310857.apps.googleusercontent.com";
-    private static final String AUTHZ_CLIENT_SECRET = "brGLaQh_KRm-SvmXz2kYGASc";
     private static final String AUTHZ_REDIRECT_URL = "http://localhost";
     private static final String MODULE_NAME = "GoogleDriveAuthz";
+    private static final String AUTHZ_CLIENT_ID = "";
+    private static final String AUTHZ_CLIENT_SECRET = "";
 
     static {
         try {

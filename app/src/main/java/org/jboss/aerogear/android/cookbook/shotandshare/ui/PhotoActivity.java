@@ -22,6 +22,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -32,6 +33,8 @@ import org.jboss.aerogear.android.cookbook.shotandshare.service.UploadService;
 import org.jboss.aerogear.android.cookbook.shotandshare.util.GooglePlusHelper;
 
 public class PhotoActivity extends ActionBarActivity {
+
+    private static final String TAG = PhotoActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,8 +88,9 @@ public class PhotoActivity extends ActionBarActivity {
 
                         @Override
                         public void onFailure(Exception e) {
-                            // LOG
-                            Toast.makeText(getApplicationContext(), "An Error", Toast.LENGTH_SHORT).show();
+                            Log.e(TAG, e.getMessage(), e);
+                            String message = getString(R.string.authentication_error, getString(R.string.google));
+                            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                         }
                     }
             );

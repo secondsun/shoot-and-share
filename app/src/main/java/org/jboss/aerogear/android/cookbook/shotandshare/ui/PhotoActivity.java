@@ -32,6 +32,7 @@ import org.jboss.aerogear.android.cookbook.shotandshare.R;
 import org.jboss.aerogear.android.cookbook.shotandshare.service.UploadService;
 import org.jboss.aerogear.android.cookbook.shotandshare.util.FacebookHelper;
 import org.jboss.aerogear.android.cookbook.shotandshare.util.GooglePlusHelper;
+import org.jboss.aerogear.android.cookbook.shotandshare.util.KeycloakHelper;
 
 public class PhotoActivity extends ActionBarActivity {
 
@@ -122,7 +123,24 @@ public class PhotoActivity extends ActionBarActivity {
     }
 
     private void sendPhotoToKeycloak() {
-        Toast.makeText(getApplicationContext(), "Keycloak", Toast.LENGTH_SHORT).show();
+        if (!KeycloakHelper.isConnected()) {
+
+            KeycloakHelper.connect(PhotoActivity.this, new Callback() {
+                        @Override
+                        public void onSuccess(Object o) {
+                            sendPhoto(UploadService.PROVIDERS.KEYCLOAK);
+                        }
+
+                        @Override
+                        public void onFailure(Exception e) {
+                            logAndDisplayAuthenticationError(e, UploadService.PROVIDERS.KEYCLOAK);
+                        }
+                    }
+            );
+
+        } else {
+            sendPhoto(UploadService.PROVIDERS.KEYCLOAK);
+        }
     }
 
     private void sendPhoto(UploadService.PROVIDERS provider) {

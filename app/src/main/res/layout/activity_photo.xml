@@ -18,18 +18,21 @@
         android:orientation="horizontal">
 
         <ImageView
+            android:id="@+id/google_plus"
             style="@style/social_icon_vertical"
             android:contentDescription="@string/google_plus_icon"
             android:background="#dd4b39"
             android:src="@drawable/ic_google_plus" />
 
         <ImageView
+            android:id="@+id/keycloak"
             style="@style/social_icon_vertical"
             android:contentDescription="@string/keycloak_icon"
             android:background="#014e7c"
             android:src="@drawable/ic_keycloak" />
 
         <ImageView
+            android:id="@+id/facebook"
             style="@style/social_icon_vertical"
             android:contentDescription="@string/facebook_icon"
             android:background="#3b5998"

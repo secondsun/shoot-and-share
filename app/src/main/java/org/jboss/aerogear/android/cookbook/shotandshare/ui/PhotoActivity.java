@@ -21,7 +21,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import org.jboss.aerogear.android.cookbook.shotandshare.R;
 
@@ -31,6 +33,30 @@ public class PhotoActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo);
+
+        ImageView googlePlus = (ImageView) findViewById(R.id.google_plus);
+        googlePlus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendPhotoToGooglePlus();
+            }
+        });
+
+        ImageView keycloak = (ImageView) findViewById(R.id.keycloak);
+        keycloak.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendPhotoToKeycloak();
+            }
+        });
+
+        ImageView facebook = (ImageView) findViewById(R.id.facebook);
+        facebook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendPhotoToFacebook();
+            }
+        });
     }
 
     @Override
@@ -42,6 +68,18 @@ public class PhotoActivity extends ActionBarActivity {
 
         ImageView imageView = (ImageView) findViewById(R.id.image);
         imageView.setImageBitmap(bitmap);
+    }
+
+    private void sendPhotoToFacebook() {
+        Toast.makeText(getApplicationContext(), "Facebook", Toast.LENGTH_SHORT).show();
+    }
+
+    private void sendPhotoToKeycloak() {
+        Toast.makeText(getApplicationContext(), "Keycloak", Toast.LENGTH_SHORT).show();
+    }
+
+    private void sendPhotoToGooglePlus() {
+        Toast.makeText(getApplicationContext(), "Google Plus", Toast.LENGTH_SHORT).show();
     }
 
 }

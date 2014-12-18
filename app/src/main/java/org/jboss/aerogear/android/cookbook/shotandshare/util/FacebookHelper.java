@@ -41,10 +41,10 @@ public class FacebookHelper {
     private static final String AUTHZ_ENDPOINT = "www.facebook.com/dialog/oauth";
     private static final String AUTHZ_TOKEN_ENDPOINT = "graph.facebook.com/oauth/access_token";
     private static final String AUTHZ_ACCOOUNT_ID = "facebook-token";
-    private static final String AUTHZ_CLIENT_ID = "310605179126239";
-    private static final String AUTHZ_CLIENT_SECRET = "f6053a175cd0f3ce8de64c78ca974f82";
     private static final String AUTHZ_REDIRECT_URL = "https://localhost/";
     private static final String MODULE_NAME = "FacebookOAuth";
+    private static final String AUTHZ_CLIENT_ID = "";
+    private static final String AUTHZ_CLIENT_SECRET = "";
 
     static {
         try {

@@ -30,6 +30,7 @@ import android.widget.Toast;
 import org.jboss.aerogear.android.Callback;
 import org.jboss.aerogear.android.cookbook.shotandshare.R;
 import org.jboss.aerogear.android.cookbook.shotandshare.service.UploadService;
+import org.jboss.aerogear.android.cookbook.shotandshare.util.FacebookHelper;
 import org.jboss.aerogear.android.cookbook.shotandshare.util.GooglePlusHelper;
 
 public class PhotoActivity extends ActionBarActivity {
@@ -88,10 +89,9 @@ public class PhotoActivity extends ActionBarActivity {
 
                         @Override
                         public void onFailure(Exception e) {
-                            Log.e(TAG, e.getMessage(), e);
-                            String message = getString(R.string.authentication_error, getString(R.string.google));
-                            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                            logAndDisplayAuthenticationError(e, UploadService.PROVIDERS.GOOGLE);
                         }
+
                     }
             );
 
@@ -101,7 +101,24 @@ public class PhotoActivity extends ActionBarActivity {
     }
 
     private void sendPhotoToFacebook() {
-        Toast.makeText(getApplicationContext(), "Facebook", Toast.LENGTH_SHORT).show();
+        if (!FacebookHelper.isConnected()) {
+
+            FacebookHelper.connect(PhotoActivity.this, new Callback() {
+                        @Override
+                        public void onSuccess(Object o) {
+                            sendPhoto(UploadService.PROVIDERS.FACEBOOK);
+                        }
+
+                        @Override
+                        public void onFailure(Exception e) {
+                            logAndDisplayAuthenticationError(e, UploadService.PROVIDERS.FACEBOOK);
+                        }
+                    }
+            );
+
+        } else {
+            sendPhoto(UploadService.PROVIDERS.FACEBOOK);
+        }
     }
 
     private void sendPhotoToKeycloak() {
@@ -113,6 +130,12 @@ public class PhotoActivity extends ActionBarActivity {
         shareIntent.putExtra(UploadService.FILE_URI, getIntent().getStringExtra("PHOTO"));
         shareIntent.putExtra(UploadService.PROVIDER, provider.name());
         startService(shareIntent);
+    }
+
+    private void logAndDisplayAuthenticationError(Exception e, UploadService.PROVIDERS provider) {
+        Log.e(TAG, e.getMessage(), e);
+        String message = getString(R.string.authentication_error, provider.name());
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
 
 }

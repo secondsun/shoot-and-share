@@ -7,6 +7,5 @@
     <string name="keycloak_icon">Keycloak icon</string>
     <string name="facebook_icon">Facebook icon</string>
     <string name="authentication_error">An error occurred when try authenticate on %1$s</string>
-    <string name="google">Google</string>
 </resources>
 

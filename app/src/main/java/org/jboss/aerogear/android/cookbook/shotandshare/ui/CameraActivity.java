@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.jboss.aerogear.android.cookbook.shotandshare;
+package org.jboss.aerogear.android.cookbook.shotandshare.ui;
 
 import android.content.Intent;
 import android.content.res.Configuration;

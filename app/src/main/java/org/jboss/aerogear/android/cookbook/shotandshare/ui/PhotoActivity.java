@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.jboss.aerogear.android.cookbook.shotandshare;
+package org.jboss.aerogear.android.cookbook.shotandshare.ui;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

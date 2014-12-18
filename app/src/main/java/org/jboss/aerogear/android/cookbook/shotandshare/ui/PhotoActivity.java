@@ -17,6 +17,7 @@
 
 package org.jboss.aerogear.android.cookbook.shotandshare.ui;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -25,7 +26,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import org.jboss.aerogear.android.Callback;
 import org.jboss.aerogear.android.cookbook.shotandshare.R;
+import org.jboss.aerogear.android.cookbook.shotandshare.service.UploadService;
+import org.jboss.aerogear.android.cookbook.shotandshare.util.GooglePlusHelper;
 
 public class PhotoActivity extends ActionBarActivity {
 
@@ -70,6 +74,28 @@ public class PhotoActivity extends ActionBarActivity {
         imageView.setImageBitmap(bitmap);
     }
 
+    private void sendPhotoToGooglePlus() {
+        if (!GooglePlusHelper.isConnected()) {
+
+            GooglePlusHelper.connect(PhotoActivity.this, new Callback() {
+                        @Override
+                        public void onSuccess(Object o) {
+                            sendPhoto(UploadService.PROVIDERS.GOOGLE);
+                        }
+
+                        @Override
+                        public void onFailure(Exception e) {
+                            // LOG
+                            Toast.makeText(getApplicationContext(), "An Error", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+            );
+
+        } else {
+            sendPhoto(UploadService.PROVIDERS.GOOGLE);
+        }
+    }
+
     private void sendPhotoToFacebook() {
         Toast.makeText(getApplicationContext(), "Facebook", Toast.LENGTH_SHORT).show();
     }
@@ -78,8 +104,11 @@ public class PhotoActivity extends ActionBarActivity {
         Toast.makeText(getApplicationContext(), "Keycloak", Toast.LENGTH_SHORT).show();
     }
 
-    private void sendPhotoToGooglePlus() {
-        Toast.makeText(getApplicationContext(), "Google Plus", Toast.LENGTH_SHORT).show();
+    private void sendPhoto(UploadService.PROVIDERS provider) {
+        Intent shareIntent = new Intent(PhotoActivity.this, UploadService.class);
+        shareIntent.putExtra(UploadService.FILE_URI, getIntent().getStringExtra("PHOTO"));
+        shareIntent.putExtra(UploadService.PROVIDER, provider.name());
+        startService(shareIntent);
     }
 
 }

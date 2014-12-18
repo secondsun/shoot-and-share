@@ -42,8 +42,7 @@ public final class UploadService extends Service {
     public static final String FILE_URI = "UploadService.FILE_URI";
     public static final String PROVIDER = "UploadService.PROVIDER";
 
-    public static enum PROVIDERS {GOOGLE, KEYCLOAK, FACEBOOK};
-
+    public static enum PROVIDERS {GOOGLE, KEYCLOAK, FACEBOOK}
 
     private static final AtomicInteger notificationCount = new AtomicInteger(1);
 
@@ -111,7 +110,7 @@ public final class UploadService extends Service {
         Notification.Builder builder = new Notification.Builder(this);
         builder.setSmallIcon(R.drawable.ic_launcher);
         builder.setContentTitle("Uploading...");
-        builder.setContentText("Uploading " +fileName);
+        builder.setContentText("Uploading " + fileName);
         builder.setProgress(0, 0, true);
         builder.setOngoing(true);
 
@@ -176,10 +175,9 @@ public final class UploadService extends Service {
         @Override
         public void onFailure(Exception e) {
             Log.e(TAG, e.getMessage(), e);
-            displayErrorNotification(e.getMessage(),id);
+            displayErrorNotification(e.getMessage(), id);
         }
     }
-
 
 
 }

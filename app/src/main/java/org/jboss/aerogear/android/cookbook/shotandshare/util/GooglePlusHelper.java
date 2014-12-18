@@ -47,7 +47,6 @@ public class GooglePlusHelper {
 
     static {
         try {
-
             AuthorizationManager.config(MODULE_NAME, OAuth2AuthorizationConfiguration.class)
                     .setBaseURL(new URL(AUTHZ_URL))
                     .setAuthzEndpoint(AUTHZ_ENDPOINT)
@@ -66,8 +65,6 @@ public class GooglePlusHelper {
                     .withUrl(new URL("https://www.googleapis.com/upload/drive/v2/files?uploadType=multipart"))
                     .requestBuilder(new GoogleDriveFileUploadRequestBuilder())
                     .forClass(PhotoHolder.class);
-
-
         } catch (MalformedURLException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
@@ -92,8 +89,6 @@ public class GooglePlusHelper {
                     callback.onFailure(e);
                 }
             });
-
-
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(e);
@@ -102,10 +97,11 @@ public class GooglePlusHelper {
 
 
     public static void upload(final File file, final Callback callback, Activity activity) {
-            PipeManager.get("gp-upload", activity).save(new PhotoHolder(file), callback);
+        PipeManager.get("gp-upload", activity).save(new PhotoHolder(file), callback);
     }
 
     public static boolean isConnected() {
         return AuthorizationManager.getModule(MODULE_NAME).isAuthorized();
     }
+
 }

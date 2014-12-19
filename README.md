@@ -78,6 +78,7 @@ Scroll to Security and enable 'Embedded browser OAuth Login' and make 'https://l
 
 ![Facebook - Enable OAuth](docs/facebook-6.png)
 
+Now save your changes and Facebook is ready to go.
 
 #### Keycloak and Shoot Server Setup
 

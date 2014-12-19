@@ -1,11 +1,17 @@
 # Shoot and Share: Basic Mobile Application showing AeroGear Pipe and Authorization with multiple service providers
 ---------
 Authors: Summers Pittman (secondsun) - Daniel Passos (dpassos)
+
 Level: Advanced
+
 Technologies: Java, Android, Googele, Facebook, KeyCloak   
+
 Summary: And example of interacting with several modern web services.
+
 Target Product: -   
+
 Product Versions: -   
+
 Source: https://github.com/secondsun/shoot-and-share
 
 ## What is it?
@@ -81,6 +87,8 @@ Scroll to Security and enable 'Embedded browser OAuth Login' and make 'https://l
 
 #### Keycloak and Shoot Server Setup
 
+Please refer to [aerogear-backend-cookbook shoot recipe](https://github.com/aerogear/aerogear-backend-cookbook/tree/master/Shoot).
+
 ### 3. Application Setup
 
 #### Enable Google Account
@@ -91,7 +99,9 @@ In the class `GooglePlusHelper` there are two fields `AUTHZ_CLIENT_ID` and `AUTH
 
 In the class `FacebookHelper` there are two fields `AUTHZ_CLIENT_ID` and `AUTHZ_CLIENT_ID`.  Use the values for 'App ID' and 'App Secret' you received from Facebook during 'Facebook Account Setup'
 
-#### Shoot Backend Setup
+#### Enable Shoot Server Integration
+
+In the class `KeycloakHelper` edit the field 'SHOOT_SERVER_URL' to refer to the address of the server you are running the shoot server on.  If this is the host machine of the emulator you can use 'http://10.0.2.2:8080'
 
 ### 4. Build Application
 
@@ -119,4 +129,10 @@ Application output is displayed in the command line window.
 
 ## How does it work?
 
+`CameraActivity` is responsible for taking pictures and saving them locally.  After you take a picture an intent will launch `PhotoActivity`.
 
+`PhotoActivity` is the sharing UI.  In this class the calls are made to connect to the remote services using helper classes and uploads photos using an intent to start a background service.
+
+`GooglePlusHelper`, `FacebookHelper`, and `KeycloakHelper` are utility classes which connect to remote services using `aerogear-android-authz` and upload photos to these services using `aerogear-android-pipe`.
+
+`UploadService` performs the upload in the background so the UI is not blocked.

@@ -52,6 +52,33 @@ You also edit the 'Consent screen'. Go to API > Consent screen and edit the proj
 
 #### Facebook Account Setup
 
+First you must have a Facebook account.  Now open the [Facebook Developers](https://developers.facebook.com/) page and select 'Apps' -> 'Add a New App'
+
+![Facebook - Add App](docs/facebook-0.png)
+
+Click on 'advanced setup'
+
+![Facebook - Add App Window](docs/facebook-2.png)
+
+Setup a Display Name and Namespace and select a category, then click create app ID
+
+![Facebook - Create App](docs/facebook-3.png)
+
+Fill out the captcha
+
+You are now on the Dashboard view.  Make a note of your 'App ID' and 'App Secret'You are now on the Dashboard view.  Make a note of your 'App ID' and 'App Secret'
+
+![Facebook - Dashboard](docs/facebook-4.png)
+
+Select 'Settings' from the sidebar and then the 'Advanced' tab
+
+![Facebook - Advanced Tab](docs/facebook-5.png)
+
+Scroll to Security and enable 'Embedded browser OAuth Login' and make 'https://localhost/' your redirectURI
+
+![Facebook - Enable OAuth](docs/facebook-6.png)
+
+
 #### Keycloak and Shoot Server Setup
 
 ### 3. Application Setup
@@ -62,7 +89,7 @@ In the class `GooglePlusHelper` there are two fields `AUTHZ_CLIENT_ID` and `AUTH
 
 #### Enable Facebook Account
 
-In the class `FacebookHelper` there are two fields `AUTHZ_CLIENT_ID` and `AUTHZ_CLIENT_ID`.  Use the values you received from Facebook during 'Facebook Account Setup'
+In the class `FacebookHelper` there are two fields `AUTHZ_CLIENT_ID` and `AUTHZ_CLIENT_ID`.  Use the values for 'App ID' and 'App Secret' you received from Facebook during 'Facebook Account Setup'
 
 #### Shoot Backend Setup
 

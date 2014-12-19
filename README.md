@@ -1,18 +1,12 @@
 # Shoot and Share: Basic Mobile Application showing AeroGear Pipe and Authorization with multiple service providers
 ---------
-Authors: Summers Pittman (secondsun) - Daniel Passos (dpassos)
-
-Level: Advanced
-
-Technologies: Java, Android, Googele, Facebook, KeyCloak   
-
-Summary: And example of interacting with several modern web services.
-
-Target Product: -   
-
-Product Versions: -   
-
-Source: https://github.com/secondsun/shoot-and-share
+Authors: Summers Pittman (secondsun) - Daniel Passos (dpassos)  
+Level: Advanced  
+Technologies: Java, Android, Googele, Facebook, KeyCloak  
+Summary: And example of interacting with several modern web services.  
+Target Product: -     
+Product Versions: -     
+Source: https://github.com/secondsun/shoot-and-share  
 
 ## What is it?
 
@@ -72,7 +66,7 @@ Setup a Display Name and Namespace and select a category, then click create app 
 
 Fill out the captcha
 
-You are now on the Dashboard view.  Make a note of your 'App ID' and 'App Secret'You are now on the Dashboard view.  Make a note of your 'App ID' and 'App Secret'
+You are now on the Dashboard view.  Make a note of your 'App ID' and 'App Secret'. You are now on the Dashboard view.  Make a note of your 'App ID' and 'App Secret'
 
 ![Facebook - Dashboard](docs/facebook-4.png)
 
@@ -101,7 +95,7 @@ In the class `FacebookHelper` there are two fields `AUTHZ_CLIENT_ID` and `AUTHZ_
 
 #### Enable Shoot Server Integration
 
-In the class `KeycloakHelper` edit the field 'SHOOT_SERVER_URL' to refer to the address of the server you are running the shoot server on.  If this is the host machine of the emulator you can use 'http://10.0.2.2:8080'
+In the class `KeycloakHelper` edit the field `SHOOT_SERVER_URL` to refer to the address of the server you are running the shoot server on.  If this is the host machine of the emulator you can use 'http://10.0.2.2:8080'
 
 ### 4. Build Application
 
@@ -116,15 +110,14 @@ $ gradle clean build
 
 To deploy, run and debug the application on an Android device attached to your system, on the command line enter the following:
 
-2.1) Install generated apk to device
+5.1) Install generated apk to device
 
 ```shell
 $ cd /path/to/app
 $ gradle installDebug
 ```
 
-2.2) Open app on device
-
+5.2) Open app on device
 Application output is displayed in the command line window.
 
 ## How does it work?

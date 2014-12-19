@@ -1,63 +1,43 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="org.jboss.aerogear.snapandshare.PhotoActivity">
+    android:orientation="vertical">
 
     <ImageView
         android:id="@+id/image"
-        android:background="@color/light_blue"
-        android:adjustViewBounds="false"
-        android:scaleType="fitCenter"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/share_bar"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:contentDescription="@string/picture"
+        android:rotation="90"
+        android:scaleType="centerCrop" />
 
     <LinearLayout
-        android:id="@+id/share_bar"
-        android:layout_alignParentBottom="true"
-        android:gravity="right"
-        android:elevation="@dimen/button_elevation"
-        android:background="#FFF"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textColor="@android:color/black"
-            android:layout_weight="1"
-            android:gravity="left|center_vertical"
-            android:layout_margin="15dp"
-            android:fontFamily="sans-serif-thin"
-            android:textSize="18sp"
-            android:text="Share On : "/>
-        <ImageButton
-            android:layout_margin="5dp"
-            android:background="#0000"
-            android:visibility="gone"
-            android:layout_height="48dp"
-            android:layout_width="48dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/google_active"
-            android:id="@+id/google_button"></ImageButton>
-        <ImageButton
-            android:background="#0000"
-            android:layout_margin="5dp"
-            android:visibility="gone"
-            android:layout_height="48dp"
-            android:layout_width="48dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/facebook_active"
-            android:id="@+id/facebook_button"></ImageButton>
-        <ImageButton
-            android:background="#0000"
-            android:layout_margin="5dp"
-            android:visibility="gone"
-            android:layout_height="48dp"
-            android:layout_width="48dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/keycloak_active"
-            android:id="@+id/keycloak_button"></ImageButton>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/google_plus"
+            style="@style/social_icon_vertical"
+            android:contentDescription="@string/google_plus_icon"
+            android:background="#dd4b39"
+            android:src="@drawable/ic_google_plus" />
+
+        <ImageView
+            android:id="@+id/keycloak"
+            style="@style/social_icon_vertical"
+            android:contentDescription="@string/keycloak_icon"
+            android:background="#014e7c"
+            android:src="@drawable/ic_keycloak" />
+
+        <ImageView
+            android:id="@+id/facebook"
+            style="@style/social_icon_vertical"
+            android:contentDescription="@string/facebook_icon"
+            android:background="#3b5998"
+            android:src="@drawable/ic_facebook" />
+
     </LinearLayout>
 
-
-</RelativeLayout>
+</LinearLayout>

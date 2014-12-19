@@ -1,17 +1,24 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat">
-        <!-- customize the color palette -->
-        <item name="colorPrimary">@color/red</item><!-- Red -->
-        <item name="colorPrimaryDark">@color/blue</item><!-- Blue -->
-        <item name="colorAccent">@color/light_blue</item><!-- Light Blue -->
-        <item name="android:actionBarStyle">@style/ActionBar</item>
-        <item name="android:textColorPrimary">@color/white</item>
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@color/light_gray</item>
     </style>
 
-    <style name="ActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="android:icon">@drawable/gear</item>
-        <item name="android:logo">@drawable/gear</item>
+    <style name="social_icon">
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
     </style>
+
+    <style name="social_icon_vertical" parent="social_icon">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">@dimen/social_icon_height</item>
+        <item name="android:padding">@dimen/social_icon_vertical_padding</item>
+    </style>
+
+    <style name="social_icon_horizontal" parent="social_icon">
+        <item name="android:layout_width">@dimen/social_icon_width</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:padding">@dimen/social_icon_horizontal_padding</item>
+    </style>
+
 </resources>
